@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/md/bootstrap.min.css" />
+    <link rel="stylesheet" href="/md/mdb.min.css" />
+    <link rel="stylesheet" href="/md/fontawesone.css" />
+    <link rel="stylesheet" href="/md/addons/datatables.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+
+    <title><%= title %></title>
+    <!-- css lite  -->
+    <link rel="stylesheet" href="/cssl/styles.css">
+    <link rel="stylesheet" href="/cssl/material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="/cssl/images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="/cssl/images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="/icon.ico">
+    <style>
+        #view-source {
+          position: fixed;
+          display: block;
+          right: 0;
+          bottom: 0;
+          margin-right: 40px;
+          margin-bottom: 40px;
+          z-index: 900;
+        }
+        </style>
+    <!-- css lite  -->
+    <link rel="stylesheet" href="/main.css" />
+
+  </head>
+</div>
+  <body class="textSelected ">
+    <div class="text-center NotificationIndex" id="alerta"></div>
+ <div class="parent">
+      <div id="scroll" class="child scroll">   
+        <div id="load" class="loading-box ">
+          <div class="loading-animate">
+            <div class="body"></div>
+          </div>
+        </div>
+        <div class="  demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header ">
+          <header class="demo-header mdl-layout__header tercero">
+            <div class="mdl-layout__header-row">
+              <span class="mdl-layout-title">S.A.R.M.</span>
+              <div class="mdl-layout-spacer"></div>
+              <div class="md-form form-sm  ">
+                  <input class="form-control form-control-sm text-white" type="text" id="search">
+                
+               
+                
+                
+              </div> <div class="mdl-button mdl-js-button mdl-button--icon" id="btnSearch" >
+                  <i class="material-icons">search</i>
+                </div>
+              
+             
+            </div>
+          </header>
+          <div class="demo-drawer mdl-layout__drawer primero text-white">
+            <header class="demo-drawer-header ">
+              
+              <img src="/cssl/images/user.jpg" class="demo-avatar mx-auto">
+              <div class="demo-avatar-dropdown">
+                <!-- <div class="mdl-layout-spacer"></div> -->
+
+                <span class="mx-auto"> <% if (!usuario.username){
+                  nombre = 'null'
+                }
+                else{
+                  nombre= usuario.username
+                }%>
+              <%= nombre  %> 
+                 
+                  </span>
+              </div>
+              <div class="demo-avatar-dropdown">
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-layout-spacer"></div>
+
+                
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-layout-spacer"></div>
+                <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+                  <i class="material-icons" role="presentation">arrow_drop_down</i>
+                  <span class="visuallyhidden">Accounts</span>
+                </button>
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+                    <a href="/profile"><li class="mdl-menu__item">resumen</li></a>
+                    <a href="/configuracion"><li class="mdl-menu__item">Configuración</li></a>     
+    <%=   %> 
+<% if(usuario.roles.name === 'administrador'){ %> 
+  <a href="/configuracion"><li class="mdl-menu__item">Configuración de sistema </li></a>                            
+
+<% } %> 
+                    <a href="/auth/logout"><li class="mdl-menu__item">Salir</li></a>
+                 
+                                  
+                </ul>
+              </div>
+            </header>
+            <nav class="demo-navigation mdl-navigation segundo text-white">
+              
+              <a class="mdl-navigation__link text-white" href="/productos"><i class="text-white material-icons fas fa-coins" role="presentation"></i>productos</a>
+              <a class="mdl-navigation__link text-white" href="/maquinas">
+                <i class="text-white material-icons fas fa-cogs" role="presentation"></i>equipos</a>
+              <a class="mdl-navigation__link text-white" href="/mantenimiento"><i class="text-white material-icons fas fa-puzzle-piece" role="presentation"></i>mantenimiento</a>
+              <a class="mdl-navigation__link text-white" href="/herramientas"><i class="text-white material-icons fas fa-wrench" role="presentation"></i>herramientas</a>
+              <a class="mdl-navigation__link text-white" href="/proveedores">
+                
+                <i class="text-white material-icons fas fa-truck-moving" role="presentation"></i>proveedores</a>
+              <a class="mdl-navigation__link text-white" href="/data">
+             
+                <i class="text-white material-icons fas fa-pen"  role="presentation"></i>edicion de equipos</a>
+              <a class="mdl-navigation__link text-white" href=""><i class="text-white material-icons" role="presentation">shopping_cart</i>Purchases</a>
+             
+              <div class="mdl-layout-spacer"></div>
+              <a class="mdl-navigation__link text-white" href=""><i class="text-white material-icons" role="presentation">help_outline</i>informacion </a>
+             
+            </nav>
+          </div>
+          
+           
+          <main class="mdl-layout__content mdl-color--grey-300">
+            <div class="bagg">
+           
+              <%- content %>   
+            </div>
+          </main>
+        
+        </div>
+        
+          
+      </div>
+      </div>
+      <script src="/cssl/material.min.js"></script>
+    <script src="/md/jquery.js"></script>
+
+    <script src="/md/popper.js"></script>
+    <script src="/md/bootstrap.min.js"></script>
+    <script src="/md/mdb.min.js"></script>
+    <script src="/md/fontawesone.js"></script>
+    <script src="/md/addons/datatables.min.js"></script>
+    <script src="/validacion.js"></script>
+    <script src="/axios.js"></script>
+    <script>
+      window.onload = ()=>{
+          document.querySelector("#load").classList.add("d-none")
+  
+    document.querySelector("#scroll").classList.remove("scroll")
+      }
+  </script>
+  </body>
+</html>
