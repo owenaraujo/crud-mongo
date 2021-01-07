@@ -258,7 +258,55 @@ body {
   align-items: center;
   font-size: 2rem;
   margin: 0px;
+
 }
+@media screen and (max-height: 600px) {
+  .list-scroll {
+    max-height: 69vh;
+    height: auto;
+  }
+}
+@media screen and (min-width: 640px) {
+  .boton-tabla-delete {
+    right: 5em;
+  }
+  .boton-tabla-editar {
+    right: 5em;
+  }
+}
+.boton-tabla-delete {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 10px;
+  margin-left: 1px;
+  /* top: 0.25rem; */
+  /* left: 0rem; */
+  color: #000000;
+  border-radius: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  margin: 0px;
+}
+.boton-tabla-editar {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 50px;
+  margin-left: 1px;
+  /* top: 0.25rem; */
+  /* left: 0rem; */
+  color: #000000;
+  border-radius: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  margin: 0px;
+}
+
 .boton-tipo-2 {
   width: 30px;
   height: 30px;

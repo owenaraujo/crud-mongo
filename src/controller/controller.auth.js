@@ -77,6 +77,10 @@ passport.use(
   )
 );
 
+export const getUser = async(req, res)=>{
+const data = await Usuarios.find().populate('roles')
+console.log(data)
+}
 passport.serializeUser((user, done) => {
   done(null, user);
 });

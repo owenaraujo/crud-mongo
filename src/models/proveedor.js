@@ -36,4 +36,4 @@ const proveedorSchema = new Schema(
     timestamps: true,
   }
 );
-export default model("proveedor", proveedorSchema);
+export default model("Proveedor", proveedorSchema);

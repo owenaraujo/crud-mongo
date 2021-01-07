@@ -10,7 +10,7 @@ router.post('/signin', (req, res, next) => {
       failureRedirect: '/',
     })(req, res, next);
   });
-  
+  router.get('/getUser' ,authController.getUser)
 router.get('/logout',(req,res)=>{
     req.logOut()
     res.redirect('/')

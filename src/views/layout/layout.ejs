@@ -82,11 +82,13 @@
               <div class="demo-avatar-dropdown">
                 <!-- <div class="mdl-layout-spacer"></div> -->
 
-                <span class="mx-auto"> <% if (!usuario.username){
-                  nombre = 'null'
+                <span class="mx-auto"> <% if (usuario === null){
+                  nombre= 'no se ha iniciado sesion'
+
                 }
                 else{
-                  nombre= usuario.username
+                  nombre = usuario.username
+
                 }%>
               <%= nombre  %> 
                  
@@ -104,16 +106,21 @@
                   <span class="visuallyhidden">Accounts</span>
                 </button>
                 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+                  <% if(usuario === null) {%>
+                    <a href="/"><li class="mdl-menu__item">iniciar sesion</li></a>
+                    <% } else{ %> 
+                    
+
                     <a href="/profile"><li class="mdl-menu__item">resumen</li></a>
                     <a href="/configuracion"><li class="mdl-menu__item">Configuración</li></a>     
-    <%=   %> 
+   
 <% if(usuario.roles.name === 'administrador'){ %> 
   <a href="/configuracion"><li class="mdl-menu__item">Configuración de sistema </li></a>                            
 
 <% } %> 
                     <a href="/auth/logout"><li class="mdl-menu__item">Salir</li></a>
                  
-                                  
+                        <% } %>           
                 </ul>
               </div>
             </header>
@@ -161,12 +168,10 @@
     <script src="/md/addons/datatables.min.js"></script>
     <script src="/validacion.js"></script>
     <script src="/axios.js"></script>
-    <script>
+    <!-- <script>
       window.onload = ()=>{
-          document.querySelector("#load").classList.add("d-none")
-  
-    document.querySelector("#scroll").classList.remove("scroll")
+          
       }
-  </script>
+  </script> -->
   </body>
 </html>

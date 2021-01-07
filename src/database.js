@@ -10,6 +10,6 @@ import config from "./config/db";
     });
     console.log("conetado a ", db.connection.name);
   } catch (error) {
-    console.log(error);
+    console.log('base de datos no iniciada');
   }
 })();

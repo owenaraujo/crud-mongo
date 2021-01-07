@@ -15,11 +15,8 @@ const productoSchema = new Schema(
       required: true,
       trim: true,
     },
-    categoria: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    categoria: { ref: "categoriaProductos", type: Schema.Types.ObjectId }
+    ,
     precioLote: {
       type: Number,
       required: true,
@@ -30,11 +27,7 @@ const productoSchema = new Schema(
       required: true,
       trim: true,
     },
-    proveedor_id: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    proveedor_id: { ref: "Proveedor", type: Schema.Types.ObjectId },
     unidadMedida: {
       type: String,
       required: true,
