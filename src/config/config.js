@@ -3,13 +3,12 @@ import sessions from "express-session";
 import extend from "express-ejs-extend";
 import { createRol, Createuser } from "../libs/setup";
 import passport from "passport";
-// import  {session} from "connect-mongo";
-// import  '../database'
-// import mongoose from 'mongoose'
+
 import cors from "cors";
 import path from "path";
 import morgan from "morgan";
 import main from "../routes/main";
+import chat from "../routes/chat";
 import auth from "../routes/auth";
 import cookies from "cookie-parser";
 import mantenimiento from "../routes/mantenimiento";
@@ -60,6 +59,7 @@ app.use("/", main);
 
 app.use("/mantenimiento", mantenimiento);
 app.use("/auth", auth);
+app.use("/chat", chat);
 app.use("/system", system);
 app.use("/notas", notas);
 app.use("/productos", productos);

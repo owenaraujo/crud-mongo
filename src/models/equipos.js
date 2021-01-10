@@ -40,7 +40,7 @@ const equiposSchema = new Schema(
 
       trim: true,
     },
-    piezas:  [{ ref: "Piezas", type: Schema.Types.ObjectId }],
+    piezas: [{ ref: "Piezas", type: Schema.Types.ObjectId }],
     estado: {
       type: Boolean,
       default: true,

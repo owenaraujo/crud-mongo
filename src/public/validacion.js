@@ -7,7 +7,16 @@ const expresiones = {
   cod: /^([A-Z]{2})\-([\d]{1})/i, // 7 a 14 numeros.
   serial: /([a-z0-9])/g,
 };
-
+const validateDescripcion = (el)=>{
+  let descripcion = document.querySelector('#descripcion')
+  if (el.value != "") 
+  descripcion.classList.remove("is-invalid");
+}
+const validateNombre = (el)=>{
+  let nombre = document.querySelector('#nombre')
+  if (el.value != "") 
+  nombre.classList.remove("is-invalid");
+}
 const validateUser = (el) => {
   let msg = document.querySelector("#msgUser");
 
@@ -43,7 +52,7 @@ const replaceNumber = (el) => {
 };
 // validate codificacion
 const validateCod2 = (el) => {
-  let msg = document.querySelector("#codificacionEdit");
+  let msg = document.querySelector("#codigo");
   let str = el.value;
   el.value = str
     .replace(/^([A-Z]{2})([0-9]{2})/, "$1-$2")
@@ -65,7 +74,7 @@ const validateCod2 = (el) => {
   msg.classList.add("is-valid");
 };
 const validateCod = (el) => {
-  let msg = document.querySelector("#codificacion");
+  let msg = document.querySelector("#codigo");
   let str = el.value;
   el.value = str
     .replace(/^([a-z]{2})([0-9]{2})/i, "$1-$2")

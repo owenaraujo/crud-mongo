@@ -49,13 +49,19 @@ passport.use(
         const usuarios = await Usuarios.find({ username: username }).populate(
           "roles"
         );
+       
+        // return console.log(usuarios[0]);
+          if (usuarios[0] === undefined) return  console.log('usuario no encontrado')
+
         const users = usuarios[0];
-        console.log(users._id);
+        
         const token = jwt.sign({ id: users._id }, config.secret, { expiresIn: 36000 });
   
-        const rows = await Usuarios.findOneAndUpdate(usuarios._id, {
+        const rows = await Usuarios.findByIdAndUpdate(users._id, {
           token: token,
-        });
+        }).populate('roles')
+        // console.log(rows);
+        // return
         if (rows) {
           const user = rows;
           const validPassword = await Usuarios.comparePassword(
@@ -71,7 +77,8 @@ passport.use(
           return done(null, false);
         }
       } catch (error) {
-        res.json({message: 'error'})
+        // res.json({message: 'error'})
+        console.log(error);
       }
     }
   )

@@ -1,4 +1,12 @@
 <%- extend ('layout/layout',{title: 'inventario de mantenimiento'}) %>
 <div id="token">
-
+<%= usuario.roles.name %> 
 </div>
+<script>
+    window.onload =  () => {
+
+document.querySelector("#load").classList.add("d-none");
+
+document.querySelector("#scroll").classList.remove("scroll");
+};
+</script>

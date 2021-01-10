@@ -14,14 +14,14 @@ export const addproveedor = async (req, res) => {
   const save = await NewProveedor.save();
   res.json({message : 'guardado con exito',
 value : true});
-  } catch (error) {
+  } catch (e) {
     res.json({message: 'no se pudo procesar',
   value: false})
   }
 };
 export const getproveedor = async (req, res) => {
   try {
-    const proveedores = await Proveedor.find();
+    const proveedores = await Proveedor.find().sort({nombre:1})
   res.json(proveedores);
   } catch (error) {
    res.json({message: 'no hay conexion',
@@ -31,9 +31,9 @@ export const getproveedor = async (req, res) => {
 export const deleteproveedor = async (req, res) => {
  try {
    const { id } = req.params;
-   const data = await Proveedor.findByIdAndDelete(id);
+   await Proveedor.findByIdAndDelete(id);
    res.json({message : 'borrado con exito',
- value : true});
+ value : false});
  } catch (e) {
    res.json({message : 'no se pudo procesar',
  value : false
@@ -42,6 +42,7 @@ export const deleteproveedor = async (req, res) => {
 };
 export const putproveedor = async (req, res) => {
   try {
+    const {id} = req.params
     const {
       nombre,
       codigo,
@@ -49,12 +50,13 @@ export const putproveedor = async (req, res) => {
       correo,
       telefono,
       direccion,
-    } = req.params;
+    } = req.body;
     const datos = { nombre, codigo, descripcion, correo, telefono, direccion };
+    
     const NewDatos = await Proveedor.findByIdAndUpdate(id, datos);
     const saved = NewDatos.save();
-    res.json({message : 'guardado con exito',
-  value : true});
+    res.json({message : 'editado con exito',
+  value : null});
   } catch (e){
     res.json
     ({

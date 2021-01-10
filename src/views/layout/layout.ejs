@@ -45,11 +45,12 @@
         </style>
     <!-- css lite  -->
     <link rel="stylesheet" href="/main.css" />
-
+    <link rel="stylesheet" href="/alertas.css">
   </head>
 </div>
   <body class="textSelected ">
-    <div class="text-center NotificationIndex" id="alerta"></div>
+    
+    
  <div class="parent">
       <div id="scroll" class="child scroll">   
         <div id="load" class="loading-box ">
@@ -57,6 +58,7 @@
             <div class="body"></div>
           </div>
         </div>
+        
         <div class="  demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header ">
           <header class="demo-header mdl-layout__header tercero">
             <div class="mdl-layout__header-row">
@@ -112,7 +114,9 @@
                     
 
                     <a href="/profile"><li class="mdl-menu__item">resumen</li></a>
-                    <a href="/configuracion"><li class="mdl-menu__item">Configuración</li></a>     
+                    <a href="/configuracion"><li class="mdl-menu__item">Configuración</li></a>  
+                    <a href="/social"><li class="mdl-menu__item">social</li></a>     
+
    
 <% if(usuario.roles.name === 'administrador'){ %> 
   <a href="/configuracion"><li class="mdl-menu__item">Configuración de sistema </li></a>                            
@@ -147,9 +151,14 @@
           
            
           <main class="mdl-layout__content mdl-color--grey-300">
+            <div style="position: absolute;">
+            <div class="text-center NotificationIndex" id="alerta">
+     
+            </div></div>
             <div class="bagg">
            
               <%- content %>   
+              
             </div>
           </main>
         
@@ -158,6 +167,7 @@
           
       </div>
       </div>
+      
       <script src="/cssl/material.min.js"></script>
     <script src="/md/jquery.js"></script>
 
@@ -168,10 +178,9 @@
     <script src="/md/addons/datatables.min.js"></script>
     <script src="/validacion.js"></script>
     <script src="/axios.js"></script>
-    <!-- <script>
-      window.onload = ()=>{
-          
-      }
-  </script> -->
+    <script src="/alertas.js"></script>
+    
+
+    
   </body>
 </html>

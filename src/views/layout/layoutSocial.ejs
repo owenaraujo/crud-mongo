@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/md/bootstrap.min.css" />
+    <link rel="stylesheet" href="/md/mdb.min.css" />
+    <link rel="stylesheet" href="/md/fontawesone.css" />
+    <link rel="stylesheet" href="/md/addons/datatables.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+
+    <title><%= title %></title>
+    <!-- css lite  -->
+    <link rel="stylesheet" href="/cssl/styles.css">
+    <link rel="stylesheet" href="/cssl/material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="/cssl/images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="/cssl/images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="/icon.ico">
+    <style>
+        #view-source {
+          position: fixed;
+          display: block;
+          right: 0;
+          bottom: 0;
+          margin-right: 40px;
+          margin-bottom: 40px;
+          z-index: 900;
+        }
+        </style>
+    <!-- css lite  -->
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="stylesheet" href="/alertas.css">
+  </head>
+</div>
+  <body class="textSelected ">
+    
+    
+ <div class="parent">
+      <div id="scroll" class="child scroll">   
+        <div id="load" class="loading-box ">
+          <div class="loading-animate">
+            <div class="body"></div>
+          </div>
+        </div>
+        
+        <div class="  demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header  card  chat-room">
+          <header class="demo-header mdl-layout__header quinto">
+            <div class="mdl-layout__header-row  ">
+              <span class="mdl-layout-title">S.A.R.M.</span>
+              <div class="mdl-layout-spacer"></div>
+              <div class="md-form form-sm ">
+                  <input class="form-control form-control-sm text-white" type="text" id="search">
+                
+               <!-- searc -->
+                <style>
+
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+#hellobar-bar {
+    font-family: "Open Sans", sans-serif;
+    width: 100%;
+    margin: 0;
+    height: 30px;
+    display: table;
+    font-size: 17px;
+    font-weight: 400;
+    padding: .33em .5em;
+    -webkit-font-smoothing: antialiased;
+    color: #5c5e60;
+    position: fixed;
+    background-color: white;
+    box-shadow: 0 1px 3px 2px rgba(0,0,0,0.15);
+}
+#hellobar-bar.regular {
+    height: 30px;
+    font-size: 14px;
+    padding: .2em .5em;
+}
+.hb-content-wrapper {
+    text-align: center;
+    text-align: center;
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+}
+.hb-content-wrapper p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.hb-text-wrapper {
+    margin-right: .67em;
+    display: inline-block;
+    line-height: 1.3;
+}
+.hb-text-wrapper .hb-headline-text {
+    font-size: 1em;
+    display: inline-block;
+    vertical-align: middle;
+}
+#hellobar-bar .hb-cta {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px 0;
+    color: #ffffff;
+    background-color: #22af73;
+    border-color: #22af73
+}
+.hb-cta-button {
+    opacity: 1;
+    color: #fff;
+    display: block;
+    cursor: pointer;
+    line-height: 1.5;
+    max-width: 22.5em;
+    text-align: center;
+    position: relative;
+    border-radius: 3px;
+    white-space: nowrap;
+    margin: 1.75em auto 0;
+    text-decoration: none;
+    padding: 0;
+    overflow: hidden;
+}
+.hb-cta-button .hb-text-holder {
+    border-radius: inherit;
+    padding: 5px 15px;
+}
+.hb-close-wrapper {
+    display: table-cell;
+    width: 1.6em;
+}
+.hb-close-wrapper .icon-close {
+    font-size: 14px;
+    top: 15px;
+    right: 25px;
+    width: 15px;
+    height: 15px;
+    opacity: .3;
+    color: #000;
+    cursor: pointer;
+    position: absolute;
+    text-align: center;
+    line-height: 15px;
+    z-index: 1000;
+    text-decoration: none;
+}
+                </style>
+                  <div id="hellobar-bar" class="regular closable">
+                    <div class="hb-content-wrapper">
+                        <div class="hb-text-wrapper">
+                            <div class="hb-headline-text">
+                                <p><span>Regístrate ya en programacion.net y accederas a multitud de tutoriales gratuitos</span></p>
+                            </div>
+                        </div>
+                        <a href="http://www.programacion.net" target="_blank" class="hb-cta hb-cta-button">
+                            <div class="hb-text-holder">
+                                <p>Regístrate</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="hb-close-wrapper">
+                        <a href="javascript:void(0);" class="icon-close">✖</a>
+                    </div>
+                </div>
+<!-- search  -->
+              </div> <div class="mdl-button mdl-js-button mdl-button--icon" id="btnSearch" >
+                  <i class="material-icons">search</i>
+                </div>
+              
+             
+            </div>
+          </header>
+          <div class="demo-drawer mdl-layout__drawer  text-white">
+            <header class="demo-drawer-header quinto">
+              
+              <img src="/cssl/images/user.jpg" class="demo-avatar mx-auto">
+              <div class="demo-avatar-dropdown">
+                <!-- <div class="mdl-layout-spacer"></div> -->
+
+                <span class="mx-auto"> <% if (usuario === null){
+                  nombre= 'no se ha iniciado sesion'
+
+                }
+                else{
+                  nombre = usuario.username
+
+                }%>
+              <%= nombre  %> 
+                 
+                  </span>
+              </div>
+              <div class="demo-avatar-dropdown">
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-layout-spacer"></div>
+
+                
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-layout-spacer"></div>
+                <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+                  <i class="material-icons" role="presentation">arrow_drop_down</i>
+                  <span class="visuallyhidden">Accounts</span>
+                </button>
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+                  <% if(usuario === null) {%>
+                    <a href="/"><li class="mdl-menu__item">iniciar sesion</li></a>
+                    <% } else{ %> 
+                    
+
+                    <a href="/profile"><li class="mdl-menu__item">resumen</li></a>
+                    <a href="/configuracion"><li class="mdl-menu__item">Configuración</li></a>     
+                    <a href="/mantenimiento"><li class="mdl-menu__item">mantenimiento</li></a>     
+   
+<% if(usuario.roles.name === 'administrador'){ %> 
+  <a href="/configuracion"><li class="mdl-menu__item">Configuración de sistema </li></a>                            
+
+<% } %> 
+                    <a href="/auth/logout"><li class="mdl-menu__item">Salir</li></a>
+                 
+                        <% } %>           
+                </ul>
+              </div>
+            </header>
+            <div class="white z-depth-1  pb-0 members-panel-1 scrollbar-light-blue">
+                <ul class="list-unstyled friend-list">
+                  <li class="active grey lighten-3 p-2">
+                    <a href="#" class="d-flex justify-content-between">
+                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" alt="avatar" class="demo-avatar  rounded-circle d-flex align-self-center mr-2 z-depth-1">
+                      <div class="text-small">
+                        <strong>John Doe</strong>
+                        <p class="last-message text-muted">Hello, Are you there?</p>
+                      </div>
+                      <div class="chat-footer">
+                        <p class="text-smaller text-muted mb-0">Just now</p>
+                        <span class="badge badge-danger float-right">1</span>
+                      </div>
+                    </a>
+                  </li>
+                  
+                  <li class="p-2">
+                    <a href="#" class="d-flex justify-content-between">
+                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="demo-avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
+                      <div class="text-small">
+                        <strong>Brad Pitt</strong>
+                        <p class="last-message text-muted">Lorem ipsum dolor sit.</p>
+                      </div>
+                      <div class="chat-footer">
+                        <p class="text-smaller text-muted mb-0">5 min ago</p>
+                        <span class="text-muted float-right"><i class="fas fa-check" aria-hidden="true"></i></span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="p-2">
+                    <a href="#" class="d-flex justify-content-between">
+                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="demo-avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
+                      <div class="text-small">
+                        <strong>Brad Pitt</strong>
+                        <p class="last-message text-muted">Lorem ipsum dolor sit.</p>
+                      </div>
+                      <div class="chat-footer">
+                        <p class="text-smaller text-muted mb-0">5 min ago</p>
+                        <span class="text-muted float-right"><i class="fas fa-check" aria-hidden="true"></i></span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="p-2">
+                    <a href="#" class="d-flex justify-content-between">
+                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="demo-avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
+                      <div class="text-small">
+                        <strong>Brad Pitt</strong>
+                        <p class="last-message text-muted">Lorem ipsum dolor sit.</p>
+                      </div>
+                      <div class="chat-footer">
+                        <p class="text-smaller text-muted mb-0">5 min ago</p>
+                        <span class="text-muted float-right"><i class="fas fa-check" aria-hidden="true"></i></span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="p-2">
+                    <a href="#" class="d-flex justify-content-between">
+                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="demo-avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
+                      <div class="text-small">
+                        <strong>Brad Pitt</strong>
+                        <p class="last-message text-muted">Lorem ipsum dolor sit.</p>
+                      </div>
+                      <div class="chat-footer">
+                        <p class="text-smaller text-muted mb-0">5 min ago</p>
+                        <span class="text-muted float-right"><i class="fas fa-check" aria-hidden="true"></i></span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="p-2">
+                    <a href="#" class="d-flex justify-content-between">
+                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="demo-avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
+                      <div class="text-small">
+                        <strong>Brad Pitt</strong>
+                        <p class="last-message text-muted">Lorem ipsum dolor sit.</p>
+                      </div>
+                      <div class="chat-footer">
+                        <p class="text-smaller text-muted mb-0">5 min ago</p>
+                        <span class="text-muted float-right"><i class="fas fa-check" aria-hidden="true"></i></span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="p-2">
+                    <a href="#" class="d-flex justify-content-between">
+                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="demo-avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
+                      <div class="text-small">
+                        <strong>Brad Pitt</strong>
+                        <p class="last-message text-muted">Lorem ipsum dolor sit.</p>
+                      </div>
+                      <div class="chat-footer">
+                        <p class="text-smaller text-muted mb-0">5 min ago</p>
+                        <span class="text-muted float-right"><i class="fas fa-check" aria-hidden="true"></i></span>
+                      </div>
+                    </a>
+                  </li>
+                  
+                </ul>
+              </div>
+          </div>
+          
+           
+          <main class="mdl-layout__content mdl-color--grey-300">
+            
+            <div class="">
+           
+              <%- content %>   
+              
+            </div>
+          </main>
+        
+        </div>
+        
+          
+      </div>
+     
+      </div>
+      
+     
+      <script src="/cssl/material.min.js"></script>
+    <script src="/md/jquery.js"></script>
+
+    <script src="/md/popper.js"></script>
+    <script src="/md/bootstrap.min.js"></script>
+    <script src="/md/mdb.min.js"></script>
+    <script src="/md/fontawesone.js"></script>
+    <script src="/md/addons/datatables.min.js"></script>
+    <script src="/validacion.js"></script>
+    <script src="/axios.js"></script>
+    <script src="/alertas.js"></script>
+    
+
+    
+  </body>
+</html>

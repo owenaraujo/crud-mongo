@@ -6,7 +6,7 @@ import passport from 'passport'
 router.post('/signin', (req, res, next) => {
 
     passport.authenticate('local.signin', {
-      successRedirect: '/mantenimiento',
+      successRedirect: '/social',
       failureRedirect: '/',
     })(req, res, next);
   });

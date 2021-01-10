@@ -20,25 +20,56 @@ export const Createuser = async () => {
   try {
     const count = await Usuarios.estimatedDocumentCount();
   if (count > 0) return;
-  const name = { name: "administrador" };
-  const [rol] = await Roles.find(name);
+  const nameA = { name: "administrador" };
+  const nameB = { name: "vendedor" };
+  const nameC = { name: "usuario" };
+  const [rolA] = await Roles.find(nameA);
+  const [rolB] = await Roles.find(nameB);
+  const [rolC] = await Roles.find(nameC);
 
-  const password = "1234";
+
+  
   const values = await Promise.all([
     new Usuarios({
       nombre: "admin",
       cedula: "123456",
-      roles: [rol._id],
+      roles: [rolA._id],
       correo: "default@gmail.com",
-      password: await Usuarios.encrypPassword("password"),
+      password: await Usuarios.encrypPassword("1234"),
       pregunta: "admin",
       respuesta: "admin",
       username: "admin",
       token: "default",
       nacionalidad: "default",
     }).save(),
+    new Usuarios({
+      nombre: "vendedor",
+      cedula: "123456",
+      roles: [rolB._id],
+      correo: "default@gmail.com",
+      password: await Usuarios.encrypPassword("1234"),
+      pregunta: "vendedor",
+      respuesta: "vendedor",
+      username: "vendedor",
+      token: "default",
+      nacionalidad: "default",
+    }).save(),
+    new Usuarios({
+      nombre: "usuario",
+      cedula: "123456",
+      roles: [rolC._id],
+      correo: "default@gmail.com",
+      password: await Usuarios.encrypPassword("1234"),
+      pregunta: "usuario",
+      respuesta: "usuario",
+      username: "usuario",
+      token: "default",
+      nacionalidad: "default",
+    }).save(),
     
   ])
+  console.log(values);
+
   } catch (error) {
     console.log('sin procesar');
   }

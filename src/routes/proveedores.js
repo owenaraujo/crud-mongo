@@ -5,6 +5,6 @@ router.get("/get/", proveedorController.getproveedor);
 router.get("/get/:id", proveedorController.getproveedorById);
 router.post("/post/", proveedorController.addproveedor);
 router.delete("/delete/:id", proveedorController.deleteproveedor);
-router.put("/put/", proveedorController.putproveedor);
+router.put("/put/:id", proveedorController.putproveedor);
 
 export default router;

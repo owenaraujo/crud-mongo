@@ -25,9 +25,12 @@ router.get("/proveedores/",verifyToken, (req, res) => {
   res.render("proveedores");
 });
 router.get("/test/",verifyToken, (req, res) => {
-  res.render("test");
+  res.render("partials/chat");
 });
 router.get("/data", verifyToken,(req, res) => {
   res.render("edit");
+});
+router.get("/social", verifyToken,(req, res) => {
+  res.render("social");
 });
 export default router;
