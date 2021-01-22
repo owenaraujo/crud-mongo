@@ -10,6 +10,8 @@ const proveedorSchema = new Schema(
       type: String,
       required: true,
     },
+    status: { type: Boolean, default: true},
+
     descripcion: {
       type: String,
       required: true,

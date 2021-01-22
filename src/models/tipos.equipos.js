@@ -6,6 +6,8 @@ const tipoEquipoSchema = new Schema(
       required: true,
       trim: true,
     },
+    status: { type: Boolean, default: true},
+
     codigo: {
       type: String,
       required: true,

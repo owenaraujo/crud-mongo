@@ -1,85 +1,11 @@
 // querys
-// const btnPost = document.querySelector('#btnPost').addEventListener('click',(e)=>{
-//   e.preventDefault()
-// })
 const alerta = document.querySelector("#alerta");
-const form = document.querySelector("#form");
+const resultadoDelete = document.querySelector("#resultadoDelete");
+const informacionDelete = document.querySelector("#informacionDelete");
+const formSearchDelete = document.querySelector("#formSearchDelete");
+const form = document.querySelector("#formAdd");
 const tabla = document.querySelector("#tabla");
-const formPost = /*html*/ `<div class="form-group">
-<input
-  required
-  type="text"
-  onkeyup="validateNombre(this)"
-
-  id="nombre"
-  name="nombre"
-  placeholder="nombre"
-  class="form-control mt-3"
-  autocomplete="off"
-/>
-<input
-  required
-  type="text"
-  onkeyup="validateCod(this)"
-  style="text-transform: uppercase"
-  id="codigo"
-  name="codigo"
-  placeholder="codigo"
-  class="form-control mt-3"
-  autocomplete="off"
-/>
-<input
-  required
-  type="text"
-  onkeyup="validateDescripcion(this)"
-  id="descripcion"
-  name="descripcion"
-  placeholder="descripcion"
-  class="form-control mt-3"
-  autocomplete="off"
-/>
-<input
-  required
-  type="text"
-  onkeyup="validateCorreo(this)"
-  id="correo"
-  name="correo"
-  placeholder="correo"
-  class="form-control mt-3"
-  autocomplete="off"
-/>
-<input
-  required
-  type="text"
-  onkeyup="validateTelefono(this)"
-  id="telefono"
-  name="telefono"
-  placeholder="telefono"
-  class="form-control mt-3"
-  autocomplete="off"
-/>
-<input
-  required
-  type="text"
-  onkeyup="validateDireccion(this)"
-  id="direccion"
-
-  name="direccion"
-  placeholder="direccion"
-  class="form-control mt-3"
-  autocomplete="off"
-/>
-
-<button
-  type="button"
-  onclick="addProveedores()"
-  id="btnPost"
-  class="text-white mt-3 btn btn-block green-success"
->
-  guardar
-</button>
-</div>`;
-// const btnPost = document.querySelector("#btnPost");
+const busqueda = document.querySelector("#busqueda");
 // querys
 const alertas = (data) => {
   if (data.value === false) {
@@ -102,7 +28,7 @@ const alertas = (data) => {
     };
   }
   body = /*html*/ `
-  <div   role="alert"class="alert ${datos.estado} ">
+  <div   role="alert"class="alert ${datos.estado}" :class="{'': !dark, 'color-secondary' : dark}">
     <div class="alert--icon">
     <i class="fas fa-bell"></i>
     </div>
@@ -139,7 +65,7 @@ const addProveedores = async () => {
     );
     alertas(datos.data);
     if (datos.data.value === false) return;
-    form.reset();
+    // form.reset();
     codigo.classList.remove("is-valid");
 
     getProveedores();
@@ -147,10 +73,14 @@ const addProveedores = async () => {
     console.log("no hay respuesta del servidor");
   }
 };
-// btnPost.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   addProveedores();
-// });
+const cancelDelete = async()=>{
+  searchFromDelete.value =''
+  busqueda.classList.remove('d-none')
+  resultadoDelete.innerHTML= ``
+  informacionDelete.innerHTML= ``
+
+
+}
 const getProveedores = async () => {
   const { data } = await axios.get("/proveedores/get");
   if (data.value === false) return alertas(data);
@@ -164,23 +94,11 @@ const getProveedores = async () => {
         <tr class="table-active">
                       <th scope="row">${i + 1}</th>
                       <td>${datos.nombre}</td>
-                      <td>${datos.correo}</td>
+                      <td>${datos.codigo}</td>
                       <td>${datos.telefono}</td>
-                      <td>
+                      <td>${datos.correo}</td>
+
                       
-                      <div onclick="EditProveedor('${
-                        datos._id
-                      }')" class="boton-tabla-editar text-white c-hand yellow-danger">
-                      <i class="fas fa-pencil-alt"></i></div></div>
-                      
-                      <div onclick="deleteProveedor('${
-                        datos._id
-                      }')" class="boton-tabla-delete text-white c-hand red-alert">
-                      <i class="fas fa-trash"></i></div></div>
-                      
-                      
-                      
-                      </td>
                     </tr>
         `;
 
@@ -188,52 +106,227 @@ const getProveedores = async () => {
   }
 };
 const deleteProveedor = async (id) => {
+  busqueda.classList.remove('d-none')
+  informacionDelete.innerHTML= ``
   const { data } = await axios.delete(`/proveedores/delete/${id}`);
   alertas(data);
   getProveedores();
 };
+const innerdataEdit= async (id)=>{
+  searchFromEdit.value =''
+  busquedaEdit.classList.add('d-none')
+  resultadoEdit.innerHTML= ``
 
+  const {data}= await axios.get(`/proveedores/get/${id}`)
+ 
+body = /*html*/`
+
+<form id="formEdit" class="">
+          <div class="form-group mb-2">
+            <input
+              required
+              type="text"
+              value="${data.nombre}"
+              onkeyup="validateNombre(this)"
+              id="nombreEdit"
+              name="nombre"
+              placeholder="nombre"
+              class="form-control mt-3"
+              autocomplete="off"
+            />
+            <input
+              required
+              value="${data.codigo}"
+
+              type="text"
+              onkeyup="validateCod(this)"
+              style="text-transform: uppercase"
+              id="codigoEdit"
+              name="codigo"
+              placeholder="codigo"
+              class="form-control mt-3"
+              autocomplete="off"
+            />
+            <input
+            value="${data.descripcion}"
+            
+              required
+              type="text"
+              onkeyup="validateDescripcion(this)"
+              id="descripcionEdit"
+              name="descripcion"
+              placeholder="descripcion"
+              class="form-control mt-3"
+              autocomplete="off"
+            />
+            <div class="d-flex">
+              <input
+              value="${data.correo}"
+              
+                required
+                type="email"
+                onkeyup="validateCorreo(this)"
+                id="correoEdit"
+                name="correo"
+                placeholder="correo"
+                class="form-control mt-3 mr-2"
+                autocomplete="off"
+              />
+              <input
+              value="${data.telefono}"
+
+                required
+                type="number"
+                onkeyup="validateTelefono(this)"
+                id="telefonoEdit"
+                name="telefono"
+                placeholder="telefono"
+                class="form-control mt-3 ml-2 w-75"
+                autocomplete="off"
+              />
+            </div>
+            <input
+            value="${data.direccion}"
+
+              required
+              type="text"
+              onkeyup="validateDireccion(this)"
+              id="direccionEdit"
+              name="direccion"
+              placeholder="direccion"
+              class="form-control mt-3"
+              autocomplete="off"
+            />
+           
+          </div>
+        </form>
+        <div class="d-flex">
+
+<div onclick="sendEditProveedor('${data._id}')" class="btn c-hand btn-block  color-primary mr-2">guardar</div><div style="width: 50px; height: 40px; border-radius: 2px;" class=" c-hand red-alert  d-flex align-items-center justify-content-center"><i class="fas fa-trash-alt"></i></div>
+
+</div>
+        
+
+`
+informacionEdit.innerHTML= body
+}
+const innerdataDelete= async (id)=>{
+  searchFromDelete.value =''
+  busqueda.classList.add('d-none')
+  resultadoDelete.innerHTML= ``
+  const {data}= await axios.get(`/proveedores/get/${id}`)
+body = /*html*/`
+<div id="contenedorDelete">
+<h4>${data.nombre}</h4>
+<p>${data.descripcion}
+</p>
+<div class="d-flex justify-content-center">
+<p  class="h5"> ${data.telefono}</p> <p class=" h5 ml-3">${data.telefono}</p>
+
+</div>
+<div class="d-flex justify-content-center">
+<div onclick="deleteProveedor('${data._id}')"
+class="text-center boton-cuadrado color-primary c-hand text-white mt-3 mr-5"
+>
+
+<i class="fas fa-check"></i> <br />
+borrar
+
+</div>
+<div onclick="cancelDelete()"
+class="text-center boton-cuadrado red-alert c-hand text-white mt-3 ml-5"
+>
+
+<i class="fas fa-times"></i> <br />
+cancelar
+
+</div>
+
+
+
+</div>
+</div>
+`
+informacionDelete.innerHTML= body
+}
+const searchProveedorFromEdit = async () => {
+
+if(searchFromEdit.value === '') return
+  
+   const {data}=await axios.get(`/proveedores/get/${searchFromEdit.value}/${parametroEdit.value}`);
+   
+   if (data.length === 0) return resultadoEdit.innerHTML = `  <div class="c-hand div-search mb-3">
+   <div class="text-center w-100"> no se ha encontrado nada</div>
+ </div>`
+   let body= ``
+   for (let i = 0; i < data.length; i++) {
+     const datos = data[i];
+     
+     
+     body += /*html*/`
+     <div class="c-hand div-search mb-3">
+              <div onclick="innerdataEdit('${datos._id}')" class="text-center w-100">${datos.nombre} ${datos.codigo}</div>
+            </div>
+     
+     `
+     resultadoEdit.innerHTML= body
+   }
+  
+
+};
+const searchProveedorFromDelete = async () => {
+
+if(searchFromDelete.value === '') return resultadoDelete.innerHTML =``
+  
+   const {data}=await axios.get(`/proveedores/get/${searchFromDelete.value}/${parametroDelete.value}`);
+   
+   if (data.length === 0) return resultadoDelete.innerHTML = `  <div class="c-hand div-search mb-3">
+   <div class="text-center w-100"> no se ha encontrado nada</div>
+ </div>`
+   let body= ``
+   for (let i = 0; i < data.length; i++) {
+     const datos = data[i];
+     
+     
+     body += /*html*/`
+     <div class="c-hand div-search mb-3">
+              <div onclick="innerdataDelete('${datos._id}')" class="text-center w-100">${datos.nombre} ${datos.codigo}</div>
+            </div>
+     
+     `
+     resultadoDelete.innerHTML= body
+   }
+  
+
+};
 const EditProveedor = async (id) => {
   const { data } = await axios.get(`/proveedores/get/${id}`);
-
-  form.innerHTML = /*html*/ `
-  <div class="form-group">
-                       
-                       <input onkeyup="validateNombre(this)" value="${data.nombre}"  type="text" id="nombre" name="nombre" placeholder="nombre" class="form-control mt-3" autocomplete="off">
-                       <input  onkeyup="validateCod(this)"
-                style="text-transform: uppercase" value="${data.codigo}"  type="text" id="codigo" name="codigo" placeholder="codigo" class="form-control mt-3" autocomplete="off">
-                       <input onkeyup="validateDescripcion(this)"  value="${data.descripcion}"  type="text" id="descripcion" name="descripcion" placeholder="descripcion" class="form-control mt-3" autocomplete="off">
-                       <input onkeyup="validateCorreo(this)"  value="${data.correo}"  type="text" id="correo" name="correo" placeholder="correo" class="form-control mt-3" autocomplete="off">
-                       <input onkeyup="validateTelefono(this)"  value="${data.telefono}"  type="text" id="telefono" name="telefono" placeholder="telefono" class="form-control mt-3" autocomplete="off">
-                       <input onkeyup="validateDireccion(this)"  value="${data.direccion}"  type="text" id="direccion" name="direccion" placeholder="direccion" class="form-control mt-3" autocomplete="off">
-                    
-                      <button type="button" onclick="sendEditProveedor('${data._id}')"id="btnPost" class="text-white mt-3 btn btn-block green-success">guardar</button>
-                   </div>
-  `;
+console.log(data);
 };
 const sendEditProveedor = async (id) => {
   try {
-    if (!nombre.value) return nombre.classList.add("is-invalid");
-    if (!codigo.value) return codigo.classList.add("is-invalid");
-    if (!descripcion.value) return descripcion.classList.add("is-invalid");
-    if (!correo.value) return correo.classList.add("is-invalid");
-    if (!telefono.value) return telefono.classList.add("is-invalid");
-    if (!direccion.value) return direccion.classList.add("is-invalid");
+    if (!nombreEdit.value) return nombreEdit.classList.add("is-invalid");
+    if (!codigoEdit.value) return codigoEdit.classList.add("is-invalid");
+    if (!descripcionEdit.value) return descripcionEdit.classList.add("is-invalid");
+    if (!correoEdit.value) return correoEdit.classList.add("is-invalid");
+    if (!telefonoEdit.value) return telefonoEdit.classList.add("is-invalid");
+    if (!direccionEdit.value) return direccionEdit.classList.add("is-invalid");
 
     const datos = await axios.put(
       `/proveedores/put/${id}`,
       (data = {
-        nombre: nombre.value,
-        codigo: codigo.value,
-        descripcion: descripcion.value,
-        correo: correo.value,
-        telefono: telefono.value,
-        direccion: direccion.value,
+        nombre: nombreEdit.value,
+        codigo: codigoEdit.value,
+        descripcion: descripcionEdit.value,
+        correo: correoEdit.value,
+        telefono: telefonoEdit.value,
+        direccion: direccionEdit.value,
       })
     );
     if (datos.data.value === false) return alertas(datos.data);
     alertas(datos.data);
-    form.innerHTML = formPost;
+    busquedaEdit.classList.remove('d-none')
+  informacionEdit.innerHTML= ``
 
     getProveedores();
   } catch (error) {
@@ -245,17 +338,14 @@ window.onload = async () => {
   document.querySelector("#load").classList.add("d-none");
 
   document.querySelector("#scroll").classList.remove("scroll");
+  
 };
 
-const validateCorreo = (el) => {
-  let correo = document.querySelector("#correo");
-  if (el.value != "") correo.classList.remove("is-invalid");
-};
-const validateTelefono = (el) => {
-  let telefono = document.querySelector("#telefono");
-  if (el.value != "") telefono.classList.remove("is-invalid");
-};
-const validateDireccion = (el) => {
-  let direccion = document.querySelector("#direccion");
-  if (el.value != "") direccion.classList.remove("is-invalid");
-};
+
+
+
+
+
+
+
+

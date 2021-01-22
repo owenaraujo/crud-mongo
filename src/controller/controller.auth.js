@@ -1,39 +1,47 @@
 import Usuarios from "../models/usuarios";
+import Roles from "../models/roles";
 import jwt from "jsonwebtoken";
 import passport from "passport";
 import { Strategy } from "passport-local";
 import config from '../config/db'
+import { json } from "express";
 export const signup = async (req, res) => {
-  const {
-    nombre,
-    cedula,
-    roles,
-    correo,
-    password,
-    pregunta,
-    respuesta,
-    username,
-    nacionalidad,
-  } = req.body;
-
-  const datosUsuario = {
-    nombre,
-    cedula,
-    roles,
-    correo,
-    password: await Usuarios.encrypPassword(password),
-    pregunta,
-    respuesta,
-    username,
-    nacionalidad,
-  };
-
-  const nuevoUsuario = new Usuarios(datosUsuario);
-  const savedUser = await nuevoUsuario.save();
-  const token = jwt.sign({ id: savedUser._id }, config.secret, {
-    expiresIn: 36000, //10horas
-  });
-  res.json({ token });
+  try {
+    const {
+    
+      password,
+      pregunta,
+      respuesta,
+      username,
+      
+    } = req.body;
+  
+  const [rol] = await Roles.find({name : 'usuario'})
+  const roles =rol._id 
+  
+  
+  
+    const datosUsuario = {
+      
+      
+      roles,
+      password: await Usuarios.encrypPassword(password),
+      pregunta,
+      respuesta,
+      username,
+      
+    };
+    
+  
+    const nuevoUsuario = new Usuarios(datosUsuario).save();
+    
+    
+    res.json({value : true,
+    message: 'nuevo usuario creado'})
+  } catch (error) {
+    res.json({value : false,
+      message: 'no se pudo procesar'})
+  }
 };
 
 passport.use(
@@ -100,7 +108,21 @@ passport.deserializeUser(async (user, done) => {
   done(null, row);
 });
 
-export const GetUserByNombre = async (req, res) => {
-  const data = await Usuarios.find();
-  res.json(data);
+export const GetUserByUsername = async (req, res) => {
+  const {name}= req.params
+  const data = await Usuarios.find({username: name});
+
+
+  
+  if (data) {
+res.json(data)
+    
+  }
+  else{
+    res.json({value: true,
+    message: 'nombre de usuario disponible'})
+  }
 };
+
+
+

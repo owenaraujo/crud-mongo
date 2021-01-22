@@ -7,6 +7,7 @@ const historialMantenimientoSchema = new Schema(
       trim: true,
     },
    mantenimiento_id:  { ref: "mantenimiento", type: Schema.Types.ObjectId },
+   status: { type: Boolean, default: true},
     
     descripcion: {
       type: String,

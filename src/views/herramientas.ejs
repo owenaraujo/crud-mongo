@@ -1,3 +1,42 @@
 <% extend('layout/layout',{title:'inventario de Herramientas'}) %>
 
-<script src="/herramientas.js"></script>
+<div id="content">
+</div>
+<div id="" >
+  
+  <div  id="">
+    <h1></h1>
+    <input type="text" v-model="nuevaFruta">
+    <button class="btn btn-primary" @click='agregarFruta'>agregar</button>
+    <!-- <ul>
+      <li v-for="dato of datos" > {{dato.cantidad}}- {{dato.nombre}}</li> 
+    </ul> -->
+    <ul>
+      <li v-for="fruta of frutas" > 
+  <input type="number" v-model.number='fruta.cantidad'>
+        
+        - {{fruta.nombre}} 
+      <span v-if="fruta.cantidad === 0">sin stock</span>
+  <button class="btn btn-danger" @click="fruta.cantidad--">-</button>
+  <button class="btn btn-success" @click="fruta.cantidad++">+</button>
+      </li>
+  
+    </ul>
+    total ={{sumarFrutas}}
+  </div>
+
+</div>
+ <!-- layout -->
+</div>
+</main>
+</div>
+</div>
+</div>
+
+
+
+<script src="/controller/vue.js"></script>
+<script src="/controller/herramientas.js"></script>
+
+
+

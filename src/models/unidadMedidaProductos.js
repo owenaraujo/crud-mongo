@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-const subsistemaPiezaSchema = new Schema(
+const categoriaProductosSchema = new Schema(
   {
     nombre: {
       type: String,
@@ -8,9 +8,10 @@ const subsistemaPiezaSchema = new Schema(
     },
     status: { type: Boolean, default: true},
 
-    codigo: {
+    abreviacion: {
       type: String,
       required: true,
+      trim: true,
     },
   },
   {
@@ -18,4 +19,4 @@ const subsistemaPiezaSchema = new Schema(
     timestamps: true,
   }
 );
-export default model("subsistemaPieza", subsistemaPiezaSchema);
+export default model("categoriaProductos", categoriaProductosSchema);

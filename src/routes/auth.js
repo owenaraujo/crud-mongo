@@ -6,16 +6,17 @@ import passport from 'passport'
 router.post('/signin', (req, res, next) => {
 
     passport.authenticate('local.signin', {
-      successRedirect: '/social',
+      successRedirect: '/productos',
       failureRedirect: '/',
     })(req, res, next);
   });
   router.get('/getUser' ,authController.getUser)
 router.get('/logout',(req,res)=>{
     req.logOut()
-    res.redirect('/')
+    res.redirect('/index')
 })
 router.post("/signup", authController.signup);
-router.get("/search", authController.GetUserByNombre);
+router.get("/:name", authController.GetUserByUsername);
+router.get("/", authController.GetUserByUsername);
 
 export default router;

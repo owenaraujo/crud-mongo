@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/md/mdb.min.css" />
     <link rel="stylesheet" href="/md/fontawesone.css" />
     <link rel="stylesheet" href="/md/addons/datatables.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<script src="/component/botones.js"></script>
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
@@ -18,169 +20,305 @@
 
     <title><%= title %></title>
     <!-- css lite  -->
-    <link rel="stylesheet" href="/cssl/styles.css">
-    <link rel="stylesheet" href="/cssl/material.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/cssl/styles.css" />
+    <link rel="stylesheet" href="/cssl/material.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
     <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
-    <link rel="apple-touch-icon-precomposed" href="/cssl/images/ios-desktop.png">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite" />
+    <link
+      rel="apple-touch-icon-precomposed"
+      href="/cssl/images/ios-desktop.png"
+    />
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="/cssl/images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#3372DF">
+    <meta
+      name="msapplication-TileImage"
+      content="/cssl/images/touch/ms-touch-icon-144x144-precomposed.png"
+    />
+    <meta name="msapplication-TileColor" content="#3372DF" />
 
-    <link rel="shortcut icon" href="/icon.ico">
+    <link rel="shortcut icon" href="/icon.ico" />
     <style>
-        #view-source {
-          position: fixed;
-          display: block;
-          right: 0;
-          bottom: 0;
-          margin-right: 40px;
-          margin-bottom: 40px;
-          z-index: 900;
-        }
-        </style>
+      #view-source {
+        position: fixed;
+        display: block;
+        right: 0;
+        bottom: 0;
+        margin-right: 40px;
+        margin-bottom: 40px;
+        z-index: 900;
+      }
+    </style>
+
     <!-- css lite  -->
     <link rel="stylesheet" href="/main.css" />
-    <link rel="stylesheet" href="/alertas.css">
+    <link rel="stylesheet" href="/alertas.css" />
+    <link rel="stylesheet" href="/dark.css" />
   </head>
-</div>
-  <body class="textSelected ">
-    
-    
- <div class="parent">
-      <div id="scroll" class="child scroll">   
-        <div id="load" class="loading-box ">
+
+  <body class="textSelected">
+    <div class="parent" id="app">
+      <div id="scroll" class="child scroll">
+        <div id="load" class="loading-box">
           <div class="loading-animate">
             <div class="body"></div>
           </div>
         </div>
-        
-        <div class="  demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header ">
-          <header class="demo-header mdl-layout__header tercero">
-            <div class="mdl-layout__header-row">
+
+        <div
+          class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header"
+        >
+          <header
+            class="demo-header mdl-layout__header"
+            :class="{'dark-secondary text-white' : dark, 'tercero': !dark}"
+          >
+            <div class="mdl-layout__header-row d-flex">
               <span class="mdl-layout-title">S.A.R.M.</span>
               <div class="mdl-layout-spacer"></div>
-              <div class="md-form form-sm  ">
-                  <input class="form-control form-control-sm text-white" type="text" id="search">
-                
+              <div class="md-form form-sm">
+                <input
+                  class="form-control form-control-sm text-white"
+                  type="text"
+                  id="search"
+                  autocomplete="off"
+                />
+              </div>
+              <div
+                class="mdl-button mdl-js-button mdl-button--icon"
+                id="btnSearch"
+              >
+                <i class="material-icons">search</i>
+              </div>
+              <button
+               style="position: absolute; right: 5px;"
+                :class="{'bg-dark text-white' : !dark, 'bg-white text-dark': dark}"
+                class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
                
-                
-                
-              </div> <div class="mdl-button mdl-js-button mdl-button--icon" id="btnSearch" >
-                  <i class="material-icons">search</i>
-                </div>
-              
-             
+                @click="dark = !dark" 
+              >
+                <i class="material-icons"> brightness_4 </i>
+              </button>
             </div>
           </header>
-          <div class="demo-drawer mdl-layout__drawer primero text-white">
-            <header class="demo-drawer-header ">
+          <div
+            class="demo-drawer mdl-layout__drawer text-white"
+            :class="{'dark-complement' : dark, 'cuarto': !dark}"
+          >
+            <header class="demo-drawer-header">
               
-              <img src="/cssl/images/user.jpg" class="demo-avatar mx-auto">
+              <img src="/cssl/images/user.jpg" class="demo-avatar mx-auto" />
               <div class="demo-avatar-dropdown">
-                <!-- <div class="mdl-layout-spacer"></div> -->
-
-                <span class="mx-auto"> <% if (usuario === null){
-                  nombre= 'no se ha iniciado sesion'
-
-                }
-                else{
-                  nombre = usuario.username
-
-                }%>
-              <%= nombre  %> 
-                 
-                  </span>
+                <span class="mx-auto">
+                  <% if (usuario === null){ nombre= 'no se ha iniciado sesion' }
+                  else{ nombre = usuario.username }%> <%= nombre %>
+                </span>
               </div>
               <div class="demo-avatar-dropdown">
                 <div class="mdl-layout-spacer"></div>
                 <div class="mdl-layout-spacer"></div>
 
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-layout-spacer"></div>
                 
-                <div class="mdl-layout-spacer"></div>
-                <div class="mdl-layout-spacer"></div>
-                <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-                  <i class="material-icons" role="presentation">arrow_drop_down</i>
+                <button
+                  id="accbtn"
+                  class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+                >
+                  <i class="material-icons" role="presentation"
+                    >arrow_drop_down</i
+                  >
                   <span class="visuallyhidden">Accounts</span>
                 </button>
-                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+                <ul
+                  :class="{'color-primary': dark}"
+                  class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                  for="accbtn"
+                >
                   <% if(usuario === null) {%>
-                    <a href="/"><li class="mdl-menu__item">iniciar sesion</li></a>
-                    <% } else{ %> 
-                    
+                  <a href="/index"
+                    ><li
+                      :class="{'text-white': dark}"
+                      class="mdl-menu__item"
+                    >
+                      iniciar sesion
+                    </li></a
+                  >
+                  <% } else{ %>
 
-                    <a href="/profile"><li class="mdl-menu__item">resumen</li></a>
-                    <a href="/configuracion"><li class="mdl-menu__item">Configuración</li></a>  
-                    <a href="/social"><li class="mdl-menu__item">social</li></a>     
+                  <a href="/profile"
+                    ><li
+                      :class="{'text-white': dark}"
+                      class="mdl-menu__item"
+                    >
+                      resumen
+                    </li></a
+                  >
+                  <a href="/configuracion"
+                    ><li
+                      :class="{'text-white': dark}"
+                      class="mdl-menu__item"
+                    >
+                      Configuración
+                    </li></a
+                  >
+                  <a href="/social"
+                    ><li
+                      :class="{'text-white': dark}"
+                      class="mdl-menu__item"
+                    >
+                      social
+                    </li></a
+                  >
 
-   
-<% if(usuario.roles.name === 'administrador'){ %> 
-  <a href="/configuracion"><li class="mdl-menu__item">Configuración de sistema </li></a>                            
+                  <% if(usuario.roles.name === 'administrador'){ %>
+                  <a href="/configuracion"
+                    ><li
+                      :class="{'text-white': dark}"
+                      class="mdl-menu__item"
+                    >
+                      Configuración de sistema
+                    </li></a
+                  >
 
-<% } %> 
-                    <a href="/auth/logout"><li class="mdl-menu__item">Salir</li></a>
-                 
-                        <% } %>           
+                  <% } %>
+                  <a href="/auth/logout"
+                    ><li
+                      :class="{'text-white': dark}"
+                      class="mdl-menu__item"
+                    >
+                      Salir
+                    </li></a
+                  >
+
+                  <% } %>
                 </ul>
               </div>
             </header>
-            <nav class="demo-navigation mdl-navigation segundo text-white">
-              
-              <a class="mdl-navigation__link text-white" href="/productos"><i class="text-white material-icons fas fa-coins" role="presentation"></i>productos</a>
-              <a class="mdl-navigation__link text-white" href="/maquinas">
-                <i class="text-white material-icons fas fa-cogs" role="presentation"></i>equipos</a>
-              <a class="mdl-navigation__link text-white" href="/mantenimiento"><i class="text-white material-icons fas fa-puzzle-piece" role="presentation"></i>mantenimiento</a>
-              <a class="mdl-navigation__link text-white" href="/herramientas"><i class="text-white material-icons fas fa-wrench" role="presentation"></i>herramientas</a>
-              <a class="mdl-navigation__link text-white" href="/proveedores">
-                
-                <i class="text-white material-icons fas fa-truck-moving" role="presentation"></i>proveedores</a>
-              <a class="mdl-navigation__link text-white" href="/data">
-             
-                <i class="text-white material-icons fas fa-pen"  role="presentation"></i>edicion de equipos</a>
-              <a class="mdl-navigation__link text-white" href=""><i class="text-white material-icons" role="presentation">shopping_cart</i>Purchases</a>
-             
+            <nav
+              class="demo-navigation mdl-navigation"
+              :class="{'dark-secondary text-white' : dark, 'bg-white text-dark': !dark}"
+            >
+              <a
+                class="mdl-navigation__link"
+                :class="{'text-white' : dark, ' text-dark': !dark}"
+                href="/productos"
+                ><i
+                  class="material-icons"
+                  :class="{'text-white' : dark, ' text-dark': !dark}"
+                  role="presentation"
+                  >dashboard</i
+                >productos</a
+              >
+              <a
+                class="mdl-navigation__link"
+                :class="{'text-white' : dark, ' text-dark': !dark}"
+                href="/maquinas"
+              >
+                <i
+                  class="text-white material-icons"
+                  :class="{'text-white' : dark, 'text-dark': !dark}"
+                  role="presentation"
+                  >room_preferences</i
+                >equipos</a
+              >
+              <a
+                class="mdl-navigation__link"
+                :class="{'text-white' : dark, 'text-dark': !dark}"
+                href="/mantenimiento"
+                ><i
+                  class="material-icons"
+                  :class="{' text-white ' : dark, '  text-dark': !dark}"
+                  role="presentation"
+                  >engineering</i
+                >Mantenimiento</a
+              >
+              <a
+                class="mdl-navigation__link"
+                :class="{'text-white' : dark, ' text-dark': !dark}"
+                href="/herramientas"
+                ><i
+                  class="material-icons"
+                  :class="{'text-white' : dark, ' text-dark': !dark}"
+                  role="presentation"
+                  >build</i
+                >herramientas</a
+              >
+              <a
+                class="mdl-navigation__link"
+                :class="{'text-white' : dark, ' text-dark': !dark}"
+                href="/proveedores"
+              >
+                <i
+                  class="material-icons"
+                  :class="{'text-white' : dark, ' text-dark': !dark}"
+                  role="presentation"
+                  >add_business</i
+                >proveedores</a
+              >
+              <a
+                class="mdl-navigation__link"
+                :class="{'text-white' : dark, ' text-dark': !dark}"
+                href="/data"
+              >
+                <i
+                  class="material-icons"
+                  :class="{'text-white' : dark, ' text-dark': !dark}"
+                  role="presentation"
+                  >create</i
+                >edicion de equipos</a
+              >
+              <a
+                class="mdl-navigation__link"
+                :class="{'text-white' : dark, ' text-dark': !dark}"
+                href=""
+                ><i
+                  class="material-icons"
+                  :class="{'text-white' : dark, ' text-dark': !dark}"
+                  role="presentation"
+                  >shopping_cart</i
+                >Purchases</a
+              >
+
               <div class="mdl-layout-spacer"></div>
-              <a class="mdl-navigation__link text-white" href=""><i class="text-white material-icons" role="presentation">help_outline</i>informacion </a>
-             
+              <a
+                class="mdl-navigation__link"
+                :class="{'text-white' : dark, ' text-dark': !dark}"
+                href=""
+                ><i
+                  class="material-icons"
+                  :class="{'text-white' : dark, ' text-dark': !dark}"
+                  role="presentation"
+                  >help_outline</i
+                >informacion
+              </a>
             </nav>
           </div>
-          
-           
-          <main class="mdl-layout__content mdl-color--grey-300">
-            <div style="position: absolute;">
-            <div class="text-center NotificationIndex" id="alerta">
-     
-            </div></div>
-            <div class="bagg">
-           
-              <%- content %>   
-              
-            </div>
-          </main>
-        
-        </div>
-        
-          
-      </div>
-      </div>
-      
-      <script src="/cssl/material.min.js"></script>
-    <script src="/md/jquery.js"></script>
 
+          <main
+            class="mdl-layout__content"
+            :class="{'dark-primary text-white': dark , 'mdl-color--grey-300' : !dark}"
+          >
+            <div style="position: absolute">
+              <div class="text-center NotificationIndex" id="alerta"></div>
+            </div>
+            <div class="bagg"><%- content %>
+
+    <script src="/cssl/material.min.js"></script>
+    <script src="/md/jquery.js"></script>
     <script src="/md/popper.js"></script>
     <script src="/md/bootstrap.min.js"></script>
     <script src="/md/mdb.min.js"></script>
     <script src="/md/fontawesone.js"></script>
     <script src="/md/addons/datatables.min.js"></script>
     <script src="/validacion.js"></script>
-    <script src="/axios.js"></script>
     <script src="/alertas.js"></script>
-    
-
+<script src="/axios.js"></script>
+   
     
   </body>
 </html>

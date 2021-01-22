@@ -1,7 +1,7 @@
 import { Router } from "express";
 const router = Router();
 import { verifyToken } from "../middlewares/midleware";
-router.get("/", (req, res) => {
+router.get("/index", (req, res) => {
   res.render("signin");
 });
 router.get("/mantenimiento",verifyToken, (req, res) => {

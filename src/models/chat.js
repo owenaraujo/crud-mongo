@@ -5,7 +5,7 @@ const chatSchema = new Schema({
 expireAt: {
   type: Date,
   default: Date.now,
-  index: { expires: 604800 },
+  index: { expires: '8h' },
 },
 },
 {

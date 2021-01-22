@@ -5,37 +5,39 @@ const usuarioSchema = new Schema(
     nombre: {
       type: String,
       unique: true,
-      required: true,
+      
       trim: true,
     },
     cedula: {
       type: String,
-      required: true,
+      
     },
     roles: { ref: "Roles", type: Schema.Types.ObjectId },
     correo: {
       type: String,
-      required: true,
+      
       trim: true,
     },
+    status: { type: Boolean, default: false},
+
     password: {
       type: String,
-      required: true,
+      
       trim: true,
     },
     pregunta: {
       type: String,
-      required: true,
+      
       trim: true,
     },
     respuesta: {
       type: String,
-      required: true,
+      
       trim: true,
     },
     username: {
       type: String,
-      required: true,
+      
       trim: true,
     },
     token: {
@@ -43,7 +45,7 @@ const usuarioSchema = new Schema(
     },
     nacionalidad: {
       type: String,
-      required: true,
+      
       trim: true,
     },
   },

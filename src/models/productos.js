@@ -17,12 +17,9 @@ const productoSchema = new Schema(
     },
     categoria: { ref: "categoriaProductos", type: Schema.Types.ObjectId }
     ,
-    precioLote: {
-      type: Number,
-      required: true,
-      trim: true,
-    },
-    precioMin: {
+    status: { type: Boolean, default: true},
+
+    precioUnitario: {
       type: Number,
       required: true,
       trim: true,
@@ -34,7 +31,7 @@ const productoSchema = new Schema(
       trim: true,
     },
     cantidad: {
-      type: String,
+      type: Number,
       required: true,
       trim: true,
     },

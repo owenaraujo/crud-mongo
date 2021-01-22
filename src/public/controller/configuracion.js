@@ -71,6 +71,18 @@ const deleteCategoriasProducto = async (id) => {
 
   getCategoriaProducto();
 };
-window.addEventListener("load", () => {
-  getCategoriaProducto();
-});
+
+window.onload= async()=>{
+  
+  await getCategoriaProducto()
+    document.querySelector("#load").classList.add("d-none");
+  
+    document.querySelector("#scroll").classList.remove("scroll");
+  }
+
+
+  // vue 
+
+
+  
+  // vue 

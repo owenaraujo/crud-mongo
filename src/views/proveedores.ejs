@@ -1,106 +1,348 @@
 <% extend ('layout/layout', {title: 'inventario de proveedores'})%>
 
 <div class="container-fluid">
-  <div class="row mx-auto">
-    <div class="col-lg-9 col-md-8 col-sm-10 mx-auto">
-      <div class="card mt-3 list-scroll">
-        <div class="text-center">
-          <table class="table table-striped table-hover">
-            <thead class="table-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Proveedor</th>
-                <th scope="col">Correo</th>
-                <th scope="col">Telefono</th>
-                <th scope="col">acciones</th>
-              </tr>
-            </thead>
-            <tbody class="" id="tabla"></tbody>
-          </table>
+  <botones></botones>
+
+  <div class="card mt-3 list-scroll scrollbar-light-blue">
+    <div class="text-center">
+      <table
+        class="table table-striped table-hover"
+        :class="{'table-dark': dark}"
+      >
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">proveedor</th>
+            <th scope="col">codigo</th>
+            <th scope="col">telefono</th>
+            <th scope="col">correo</th>
+          </tr>
+        </thead>
+        <tbody class="" id="tabla"></tbody>
+        <tfoot class="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">proveedor</th>
+            <th scope="col">codigo</th>
+            <th scope="col">telefono</th>
+            <th scope="col">correo</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- modal edit -->
+
+<div
+  class="modal fade"
+  id="modalEdit"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content" :class="{'dark-secondary ': dark}">
+      <div
+        class="modal-header text-center"
+        :class="{'color-secondary text-white': dark}"
+      >
+        <h4 class="modal-title w-100 font-weight-bold">Editar</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div id="busquedaEdit">
+          <div class="md-form mb-4 d-flex">
+            <i class="fas fa-search prefix grey-text"></i>
+            <input
+            autocomplete="off"
+            onkeyup="searchProveedorFromEdit()"
+              type="text"
+              id="searchFromEdit"
+              class="form-control"
+              :class="{'text-white':dark}"
+            />
+            <select
+              style="
+                border-bottom-right-radius: 20px;
+                border-top-right-radius: 20px;
+                border-left: 0px;
+  
+                border-top: 0px;
+                padding-left: 10px;
+              "
+              name=""
+              id="parametroEdit"
+              class="form-control w-40 custom-select ml-3"
+              :class="{'text-white':dark}"
+            >
+              <option :class="{'text-white bg-dark':dark}" value="nombre">
+                nombre
+              </option>
+              <option :class="{'text-white bg-dark':dark}" value="codigo">
+                codigo
+              </option>
+              <option :class="{'text-white bg-dark':dark}" value="correo">
+                correo
+              </option>
+              <option :class="{'text-white bg-dark':dark}" value="direccion">
+                direccion
+              </option>
+            </select>
+            <label
+              data-error="wrong"
+              :class="{'text-white': dark}"
+              data-success="right"
+              for="defaultForm-pass"
+              >buscar</label
+            >
+          </div>
+  
+          <div
+            id="resultadoEdit"
+            class="list-scroll scrollbar-light-blue"
+            style="max-height: 50vh"
+          >
+            <div class="c-hand div-search mb-3">
+              <div class="text-center w-100">nombre del proveedor codigo</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="informacionEdit">
+
+
         </div>
       </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-10 mx-auto">
-      <div class="card mt-3">
-        <div class="card-body">
-          <form id="form" class="">
-            <div class="form-group mb-2">
-              <input
-                required
-                type="text"
-                onkeyup="validateNombre(this)"
-                id="nombre"
-                name="nombre"
-                placeholder="nombre"
-                class="form-control mt-3"
-                autocomplete="off"
-              />
-              <input
-                required
-                type="text"
-                onkeyup="validateCod(this)"
-                style="text-transform: uppercase"
-                id="codigo"
-                name="codigo"
-                placeholder="codigo"
-                class="form-control mt-3"
-                autocomplete="off"
-              />
-              <input
-                required
-                type="text"
-                onkeyup="validateDescripcion(this)"
-                id="descripcion"
-                name="descripcion"
-                placeholder="descripcion"
-                class="form-control mt-3"
-                autocomplete="off"
-              />
-              <input
-                required
-                type="text"
-                onkeyup="validateCorreo(this)"
-                id="correo"
-                name="correo"
-                placeholder="correo"
-                class="form-control mt-3"
-                autocomplete="off"
-              />
-              <input
-                required
-                type="text"
-                onkeyup="validateTelefono(this)"
-                id="telefono"
-                name="telefono"
-                placeholder="telefono"
-                class="form-control mt-3"
-                autocomplete="off"
-              />
-              <input
-                required
-                type="text"
-                onkeyup="validateDireccion(this)"
-                id="direccion"
-                name="direccion"
-                placeholder="direccion"
-                class="form-control mt-3"
-                autocomplete="off"
-              />
-
-              <button
-                type="button"
-                onclick="addProveedores()"
-                id="btnPost"
-                class="text-white mt-3 btn btn-block green-success"
-              >
-                guardar
-              </button>
-            </div>
-          </form>
-        </div>
+      <div class="modal-footer d-flex justify-content-center mr-4 ml-4">
+        
       </div>
     </div>
   </div>
 </div>
 
+<!-- modal edit -->
+<!-- modal add  -->
+<div
+  class="modal fade"
+  id="modalAdd"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content" :class="{'dark-secondary ': dark}">
+      <div
+        class="modal-header text-center"
+        :class="{'color-secondary text-white': dark}"
+      >
+        <h4 class="modal-title w-100 font-weight-bold">Agregar</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <form id="formAdd" class="">
+          <div class="form-group mb-2">
+            <input
+              required
+              type="text"
+              onkeyup="validateNombre(this)"
+              id="nombre"
+              name="nombre"
+              placeholder="nombre"
+              class="form-control mt-3"
+              autocomplete="off"
+            />
+            <input
+              required
+              type="text"
+              onkeyup="validateCod(this)"
+              style="text-transform: uppercase"
+              id="codigo"
+              name="codigo"
+              placeholder="codigo"
+              class="form-control mt-3"
+              autocomplete="off"
+            />
+            <input
+              required
+              type="text"
+              onkeyup="validateDescripcion(this)"
+              id="descripcion"
+              name="descripcion"
+              placeholder="descripcion"
+              class="form-control mt-3"
+              autocomplete="off"
+            />
+            <div class="d-flex">
+              <input
+                required
+                type="email"
+                onkeyup="validateCorreo(this)"
+                id="correo"
+                name="correo"
+                placeholder="correo"
+                class="form-control mt-3 mr-2"
+                autocomplete="off"
+              />
+              <input
+                required
+                type="number"
+                onkeyup="validateTelefono(this)"
+                id="telefono"
+                name="telefono"
+                placeholder="telefono"
+                class="form-control mt-3 ml-2 w-75"
+                autocomplete="off"
+              />
+            </div>
+            <input
+              required
+              type="text"
+              onkeyup="validateDireccion(this)"
+              id="direccion"
+              name="direccion"
+              placeholder="direccion"
+              class="form-control mt-3"
+              autocomplete="off"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer d-flex justify-content-center mr-4 ml-4">
+        <button
+          type="button"
+          onclick="addProveedores()"
+          id="btnPost"
+          class="text-white mt-3 btn btn-block green-success color-primary"
+        >
+          guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal add  -->
+<!-- modal delete  -->
+<div
+  class="modal fade "
+  id="modalDelete"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content" :class="{'dark-secondary ': dark}">
+      <div
+        class="modal-header text-center"
+        :class="{'color-secondary text-white': dark}"
+      >
+        <h4 class="modal-title w-100 font-weight-bold">Borrar</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div id="busqueda">
+          <div class="md-form mb-4 d-flex" id="formSearchDelete" >
+            <i class="fas fa-search prefix grey-text"></i>
+            <input
+            autocomplete="off"
+            onkeyup="searchProveedorFromDelete()"
+              type="text"
+              id="searchFromDelete"
+              class="form-control"
+              :class="{'text-white':dark}"
+            />
+            <select
+              style="
+                border-bottom-right-radius: 20px;
+                border-top-right-radius: 20px;
+                border-left: 0px;
+  
+                border-top: 0px;
+                padding-left: 10px;
+              "
+              name=""
+              id="parametroDelete"
+              class="form-control w-40 custom-select ml-3"
+              :class="{'text-white':dark}"
+            >
+              <option :class="{'text-white bg-dark':dark}" value="nombre">
+                nombre
+              </option>
+              <option :class="{'text-white bg-dark':dark}" value="codigo">
+                codigo
+              </option>
+              <option :class="{'text-white bg-dark':dark}" value="correo">
+                correo
+              </option>
+              <option :class="{'text-white bg-dark':dark}" value="direccion">
+                direccion
+              </option>
+            </select>
+            <label
+              data-error="wrong"
+              :class="{'text-white': dark}"
+              data-success="right"
+              for="defaultForm-pass"
+              >buscar</label
+            >
+          </div>
+  
+          <div
+            id="resultadoDelete"
+            class="list-scroll scrollbar-light-blue"
+            style="max-height: 50vh"
+          >
+            
+          </div>
+        </div>
+        <div id="informacionDelete" class="">
+         
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center mr-4 ml-4">
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal delete  -->
+
+<!-- layout -->
+</div>
+</main>
+</div>
+</div>
+</div>
+<!-- <script src="/controller/proveedores.js"></script> -->
+<script src="/controller/vue.js"></script>
 <script src="/controller/proveedores.js"></script>
+
+<!-- form -->
+
+<!-- form -->

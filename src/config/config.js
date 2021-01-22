@@ -22,6 +22,8 @@ const app = express();
 
 createRol();
 Createuser();
+
+
 app.use(cors());
 app.use(cookies());
 app.set("info", pkg);
@@ -64,4 +66,7 @@ app.use("/system", system);
 app.use("/notas", notas);
 app.use("/productos", productos);
 app.use("/proveedores", proveedores);
+app.use(function(req, res, next) {
+  res.status(404).send('ruta no encontrada');
+});
 export default app;

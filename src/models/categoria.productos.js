@@ -6,6 +6,7 @@ const categoriaProductosSchema = new Schema(
       required: true,
       trim: true,
     },
+    status: { type: Boolean, default: true}
   },
   {
     versionKey: false,
