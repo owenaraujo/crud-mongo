@@ -17,9 +17,9 @@ const productoSchema = new Schema(
     },
     categoria: { ref: "categoriaProductos", type: Schema.Types.ObjectId }
     ,
-    status: { type: Boolean, default: true},
+    stock: { type: Number},
 
-    precioUnitario: {
+    precio: {
       type: Number,
       required: true,
       trim: true,
@@ -34,10 +34,7 @@ const productoSchema = new Schema(
       type: Number,
       required: true,
       trim: true,
-    },
-    imgUrl: {
-      type: String,
-    },
+    }
   },
   {
     versionKey: false,

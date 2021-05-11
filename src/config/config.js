@@ -10,7 +10,7 @@ import morgan from "morgan";
 
 import chat from "../routes/chat";
 import auth from "../routes/auth";
-import cookies from "cookie-parser";
+
 import mantenimiento from "../routes/mantenimiento";
 import system from "../routes/system";
 import pkg from "../../package.json";
@@ -25,7 +25,7 @@ Createuser();
 
 
 app.use(cors());
-app.use(cookies());
+
 app.set("info", pkg);
 
 app.use(express.urlencoded({ extended: true }));

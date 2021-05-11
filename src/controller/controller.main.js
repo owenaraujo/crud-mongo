@@ -8,7 +8,7 @@ export const addCategoriaProduct = async (req, res) => {
   res.json({ ok: "ok" });
 };
 export const getCategoriaProduct = async (req, res) => {
-  const data = await categoriaProductos.find({status: true});
+  const data = await categoriaProductos.find();
   res.json(data);
 };
 export const getCategoriaProductById = async (req, res) => {

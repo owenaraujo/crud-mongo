@@ -1,9 +1,7 @@
 import {config} from "dotenv"
 config()
 export default {
-    mongodb: process.env.MONGODB_URI,
+    mongodb: process.env.mongodb, 
     secret : process.env.SECRET
 
 }
-// export default {
-// }

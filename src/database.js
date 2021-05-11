@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 import config from "./config/db";
 (async () => {
   try {
-    const db = await mongoose.connect(config.mongodb, {
+    const db = await mongoose.connect(
+     
+       'mongodb://localhost:27017/sistemacarlos', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
@@ -10,6 +12,7 @@ import config from "./config/db";
     });
     console.log("conetado a ", db.connection.name);
   } catch (error) {
-    console.log('base de datos no iniciada');
+    console.log('base de datos no iniciada')
+    console.log(error);
   }
 })();

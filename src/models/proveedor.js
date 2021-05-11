@@ -12,22 +12,15 @@ const proveedorSchema = new Schema(
     },
     status: { type: Boolean, default: true},
 
-    descripcion: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    correo: {
-      type: String,
-
-      trim: true,
-    },
+   
+    
     telefono: {
       type: String,
       required: true,
       trim: true,
     },
-    direccion: {
+    
+    rif: {
       type: String,
 
       trim: true,

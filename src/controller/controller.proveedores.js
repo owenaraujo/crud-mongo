@@ -1,14 +1,14 @@
 import Proveedor from "../models/proveedor";
 export const addproveedor = async (req, res) => {
   try {
-    const { nombre, codigo, descripcion, correo, telefono, direccion } = req.body;
+    const { nombre, codigo,  telefono, rif } = req.body;
   const datos = {
     nombre,
     codigo,
-    descripcion,
-    correo,
+    
     telefono,
-    direccion,
+    
+    rif
   };
   const NewProveedor = new Proveedor(datos);
   const save = await NewProveedor.save();
@@ -68,12 +68,10 @@ export const putproveedor = async (req, res) => {
     const {
       nombre,
       codigo,
-      descripcion,
-      correo,
       telefono,
-      direccion,
+      rif,
     } = req.body;
-    const datos = { nombre, codigo, descripcion, correo, telefono, direccion };
+    const datos = { nombre, codigo, telefono, rif };
     
     const NewDatos = await Proveedor.findByIdAndUpdate(id, datos);
     const saved = NewDatos.save();
