@@ -1,14 +1,20 @@
 import categoriaProductos from "../models/categoria.productos";
 
 export const addCategoriaProduct = async (req, res) => {
-  const { nombre } = req.body;
+  try {
+    const { nombre } = req.body;
   const data = { nombre };
   const saveData = new categoriaProductos(data);
-  const datosguardados = await saveData.save();
-  res.json({ ok: "ok" });
+   await saveData.save();
+  res.json({message : 'guardado con exito',
+value : true});
+  } catch (error) {
+    res.json({message: 'no se pudo procesar',
+  value: false})
+  }
 };
 export const getCategoriaProduct = async (req, res) => {
-  const data = await categoriaProductos.find();
+  const data = await categoriaProductos.find({status: true});
   res.json(data);
 };
 export const getCategoriaProductById = async (req, res) => {
@@ -17,7 +23,18 @@ export const getCategoriaProductById = async (req, res) => {
   res.json(data);
 };
 export const deleteCategoriaProduct = async (req, res) => {
-  const { id } = req.params;
-  const data = await categoriaProductos.findByIdAndUpdate(id,{status: false});
-  res.json(data);
+  try {
+    const { id } = req.params;
+  const datos = {status: false}
+ await categoriaProductos.findByIdAndUpdate(id,datos);
+  res.json({message : 'editado con exito',
+  value : null});
+  } catch (error) {
+    res.json
+    ({
+      message : 'no se pudo procesar',
+      value: false
+
+    })
+  }
 };

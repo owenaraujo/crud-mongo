@@ -1,16 +1,20 @@
 import { Schema, model } from "mongoose";
-const unidadesSchema = new Schema(
+const empresaSchema = new Schema(
   {
     nombre: {
       type: String,
       required: true,
       trim: true,
     },
-    status: { type: Boolean, default: true},
-
-    abreviacion: {
+    telefono: {
       type: String,
       required: true,
+      trim: true,
+    },
+    
+    rif: {
+      type: String,
+
       trim: true,
     },
   },
@@ -19,4 +23,4 @@ const unidadesSchema = new Schema(
     timestamps: true,
   }
 );
-export default model("Unidades", unidadesSchema);
+export default model("Empresa", empresaSchema);
