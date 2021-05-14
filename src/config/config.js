@@ -1,11 +1,11 @@
 import express from "express";
 import sessions from "express-session";
 
-import { createRol, Createuser } from "../libs/setup";
+import { createRol, Createuser, CreateEmpresa } from "../libs/setup";
 import passport from "passport";
 
 import cors from "cors";
-import path from "path";
+
 import morgan from "morgan";
 
 import chat from "../routes/chat";
@@ -22,6 +22,7 @@ const app = express();
 
 createRol();
 Createuser();
+CreateEmpresa()
 
 
 app.use(cors());

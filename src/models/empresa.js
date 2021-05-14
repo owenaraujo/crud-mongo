@@ -17,6 +17,9 @@ const empresaSchema = new Schema(
 
       trim: true,
     },
+    dolar: {
+      type: Number,
+    },
   },
   {
     versionKey: false,

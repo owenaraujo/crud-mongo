@@ -1,5 +1,6 @@
 import Roles from "../models/roles";
 import Usuarios from "../models/usuarios";
+import Empresa from "../models/empresa";
 export const createRol = async () => {
   try {
     const count = await Roles.estimatedDocumentCount();
@@ -66,6 +67,31 @@ export const Createuser = async () => {
       token: "default",
       nacionalidad: "default",
     }).save(),
+    
+  ])
+  console.log(values);
+
+  } catch (error) {
+    console.log('sin procesar');
+  }
+
+};
+export const CreateEmpresa = async () => {
+  try {
+    const count = await Empresa.estimatedDocumentCount();
+  if (count > 0) return;
+  
+
+  
+  const values = await Promise.all([
+    new Empresa({
+      nombre: "serious programming",
+      rif: "v-28072151-1",
+      telefono: "+584147361209",
+      dolar: 123456,
+      
+    }).save(),
+    
     
   ])
   console.log(values);

@@ -22,6 +22,7 @@ const proveedorSchema = new Schema(
     
     rif: {
       type: String,
+      required: true,
 
       trim: true,
     },
