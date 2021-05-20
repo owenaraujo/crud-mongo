@@ -27,8 +27,8 @@ export const deleteCategoriaProduct = async (req, res) => {
     const { id } = req.params;
   const datos = {status: false}
  await categoriaProductos.findByIdAndUpdate(id,datos);
-  res.json({message : 'editado con exito',
-  value : null});
+  res.json({message : 'eliminado con exito',
+  value : false});
   } catch (error) {
     res.json
     ({

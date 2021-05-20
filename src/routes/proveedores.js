@@ -2,6 +2,7 @@ import { Router } from "express";
 import * as proveedorController from "../controller/controller.proveedores";
 const router = Router();
 router.get("/get/", proveedorController.getproveedor);
+router.get("/get/count", proveedorController.getproveedorCount);
 router.get("/get/:id", proveedorController.getproveedorById);
 router.get("/get/:dato/:parametro", proveedorController.getproveedoByParam);
 router.post("/post/", proveedorController.addproveedor);

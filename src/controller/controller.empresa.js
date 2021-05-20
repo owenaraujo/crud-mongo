@@ -31,7 +31,8 @@ export const putEmpresa = async (req, res) => {
 };
 export const putDolar = async (req, res) => {
   try {
-    const { dolar, id } = req.body;
+    const {id}= req.params
+    const { dolar } = req.body;
     const data = { dolar };
      await Empresa.findByIdAndUpdate(id,data);
       

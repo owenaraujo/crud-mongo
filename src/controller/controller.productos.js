@@ -32,6 +32,16 @@ export const addproductos = async (req, res) => {
     res.json({ message: "no se pudo procesar", value: false });
   }
 };
+export const getproductosCount = async (req, res) => {
+  try {
+    const productos = await Productos.find()
+      .populate("proveedor_id")
+      .populate("categoria").count()
+    res.json(productos);
+  } catch (error) {
+    res.json({ message: "no se pudo procesar", value: false });
+  }
+};
 export const getproductos = async (req, res) => {
   try {
     const productos = await Productos.find()
