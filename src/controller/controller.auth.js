@@ -1,8 +1,8 @@
 import Usuarios from "../models/usuarios";
 import Roles from "../models/roles";
 import jwt from "jsonwebtoken";
-import passport from "passport";
-import { Strategy } from "passport-local";
+
+
 import config from '../config/db'
 import { json } from "express";
 export const signup = async (req, res) => {
@@ -44,69 +44,55 @@ export const signup = async (req, res) => {
   }
 };
 
-passport.use(
-  "local.signin",new Strategy(
-    {
-      usernameField: "username",
-      passwordField: "password",
-      passReqToCallback: true,
-    },
-    async (req, username, password, done) => {
 
+    export const sigin = async (req, res) => {
+const {username, password} = req.body
       try {
         const usuarios = await Usuarios.find({ username: username }).populate(
           "roles"
         );
        
         // return console.log(usuarios[0]);
-          if (usuarios[0] === undefined) return  console.log('usuario no encontrado')
+          if (usuarios[0] === undefined) return   res.json({token: token, message: 'usuario no encontrado',
+          value: null})
 
         const users = usuarios[0];
-        
-        const token = jwt.sign({ id: users._id }, config.secret, { expiresIn: 36000 });
+           
+        const token = jwt.sign({ id: users._id }, 'secreto', { expiresIn: 36000 });
   
-        const rows = await Usuarios.findByIdAndUpdate(users._id, {
-          token: token,
-        }).populate('roles')
-        // console.log(rows);
-        // return
-        if (rows) {
-          const user = rows;
+      
+        if (users) {
+         
           const validPassword = await Usuarios.comparePassword(
             password,
-            user.password
+            users.password
           );
           if (validPassword) {
-            done(null, user);
+            res.json({token: token, message: 'inicio de sesion exitoso',
+            value: true})
           } else {
-            done(null, false);
+            res.json({message: 'clave incorrecta',
+            value: false})
+            
           }
         } else {
-          return done(null, false);
+          res.json({message: 'usuario no encontrado',
+          value: null})
+          
         }
       } catch (error) {
-        // res.json({message: 'error'})
-        console.log(error);
+        res.json({message: 'no hay conexion',
+        value: false})
+        
       }
     }
-  )
-);
+  
 
 export const getUser = async(req, res)=>{
 const data = await Usuarios.find().populate('roles')
 console.log(data)
 }
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-passport.deserializeUser(async (user, done) => {
-  const row = await Usuarios.findById(user._id, {
-    password: 0,
-    pregunta: 0,
-    respuesta: 0,
-  }).populate("roles");
-  done(null, row);
-});
+
 
 export const GetUserByUsername = async (req, res) => {
   const {name}= req.params

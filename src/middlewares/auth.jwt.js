@@ -1,23 +1,17 @@
-// import { verify } from "jsonwebtoken";
-import config from "../config/db";
 
 import jwt from "jsonwebtoken";
-import  'express-session'
-import  'express'
-// import Usuarios from "../models/usuarios";
+//import Usuarios from "../models/usuarios";
 export const verifyToken = async (req, res, next) => {
-  return next()
   try {
-  let token = req.session.passport.user.token
-
-    if (!token) return res.redirect("/");
-    const decoder = jwt.verify(token, config.secret);
-    
-    if(req.session.passport.user._id === decoder.id)
+  let {token} = req.params
+console.log(token);
+    if (!token) return res.json('no se ha iniciado session')
+    jwt.verify(token, 'secreto');
     next();
   } catch (error) {
-    console.log("no hay respuesta");
-    res.redirect("/");
+    res.json({message: 'debe iniciar sesion de nuevo',
+    value: false})
+    
   }
 };
 // password
