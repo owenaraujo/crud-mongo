@@ -34,9 +34,7 @@ export const addproductos = async (req, res) => {
 };
 export const getproductosCount = async (req, res) => {
   try {
-    const productos = await Productos.find()
-      .populate("proveedor_id")
-      .populate("categoria").count()
+    const productos = await Productos.estimatedDocumentCount()
     res.json(productos);
   } catch (error) {
     res.json({ message: "no se pudo procesar", value: false });

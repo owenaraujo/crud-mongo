@@ -5,7 +5,8 @@ export const verifyToken = async (req, res, next) => {
   try {
   let {token} = req.params
 console.log(token);
-    if (!token) return res.json('no se ha iniciado session')
+    if (token == 1234) return  res.json({message: 'no se ha iniciado sesion',
+    value: null})
     jwt.verify(token, 'secreto');
     next();
   } catch (error) {

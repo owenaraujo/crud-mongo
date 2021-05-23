@@ -4,13 +4,12 @@ const usuarioSchema = new Schema(
   {
     nombre: {
       type: String,
-      unique: true,
       
       trim: true,
     },
-    cedula: {
+    documento: {
       type: String,
-      
+      required: true
     },
     roles: { ref: "Roles", type: Schema.Types.ObjectId },
     correo: {
@@ -25,29 +24,13 @@ const usuarioSchema = new Schema(
       
       trim: true,
     },
-    pregunta: {
-      type: String,
-      
-      trim: true,
-    },
-    respuesta: {
-      type: String,
-      
-      trim: true,
-    },
+    
     username: {
       type: String,
-      
+      unique: true,
       trim: true,
     },
-    token: {
-      type: String,
-    },
-    nacionalidad: {
-      type: String,
-      
-      trim: true,
-    },
+   
   },
   {
     versionKey: false,

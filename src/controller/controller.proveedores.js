@@ -52,7 +52,7 @@ export const getproveedor = async (req, res) => {
 };
 export const getproveedorCount = async (req, res) => {
   try {
-    const proveedores = await Proveedor.find({status: true}).sort({nombre:1}).count()
+    const proveedores = await Proveedor.estimatedDocumentCount()
   res.json(proveedores);
   } catch (error) {
    res.json({message: 'no hay conexion',

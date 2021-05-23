@@ -68,7 +68,7 @@ const {username, password} = req.body
             users.password
           );
           if (validPassword) {
-            res.json({token: token, message: 'inicio de sesion exitoso',
+            res.json({token: token,id:users._id, message: 'inicio de sesion exitoso',
             value: true})
           } else {
             res.json({message: 'clave incorrecta',
@@ -81,16 +81,26 @@ const {username, password} = req.body
           
         }
       } catch (error) {
+        console.log(error);
         res.json({message: 'no hay conexion',
         value: false})
         
       }
     }
   
-
+export const getRoles = async(req, res)=>{
+const data= await Roles.find()
+res.json(data)
+} 
 export const getUser = async(req, res)=>{
+  const {id}= req.params
+const data = await Usuarios.findById(id).populate('roles')
+res.json(data)
+}
+export const getUsers = async(req, res)=>{
+  
 const data = await Usuarios.find().populate('roles')
-console.log(data)
+res.json(data)
 }
 
 

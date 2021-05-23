@@ -33,39 +33,33 @@ export const Createuser = async () => {
   const values = await Promise.all([
     new Usuarios({
       nombre: "admin",
-      cedula: "123456",
+      documento: "123456",
       roles: [rolA._id],
       correo: "default@gmail.com",
       password: await Usuarios.encrypPassword("1234"),
-      pregunta: "admin",
-      respuesta: "admin",
+     
       username: "admin",
-      token: "default",
-      nacionalidad: "default",
+     
     }).save(),
     new Usuarios({
       nombre: "vendedor",
-      cedula: "123456",
+      documento: "123456",
       roles: [rolB._id],
       correo: "default@gmail.com",
       password: await Usuarios.encrypPassword("1234"),
-      pregunta: "vendedor",
-      respuesta: "vendedor",
+      
       username: "vendedor",
-      token: "default",
-      nacionalidad: "default",
+      
     }).save(),
     new Usuarios({
       nombre: "usuario",
-      cedula: "123456",
+      documento: "123456",
       roles: [rolC._id],
       correo: "default@gmail.com",
       password: await Usuarios.encrypPassword("1234"),
-      pregunta: "usuario",
-      respuesta: "usuario",
+      
       username: "usuario",
-      token: "default",
-      nacionalidad: "default",
+     
     }).save(),
     
   ])
