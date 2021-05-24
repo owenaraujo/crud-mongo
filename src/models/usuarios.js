@@ -17,7 +17,7 @@ const usuarioSchema = new Schema(
       
       trim: true,
     },
-    status: { type: Boolean, default: false},
+    status: { type: Boolean, default: true},
 
     password: {
       type: String,

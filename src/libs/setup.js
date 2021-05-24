@@ -9,9 +9,8 @@ export const createRol = async () => {
     new Roles({ name: "usuario" }).save(),
     new Roles({ name: "administrador" }).save(),
     new Roles({ name: "vendedor" }).save(),
-    new Roles({ name: "moderador" }).save(),
-    new Roles({ name: "supervisor" }).save(),
   ]);
+  console.log(values);
   } catch (error) {
     console.log('sin procesar');
   }
@@ -74,7 +73,6 @@ export const CreateEmpresa = async () => {
   try {
     const count = await Empresa.estimatedDocumentCount();
   if (count > 0) return;
-  
 
   
   const values = await Promise.all([

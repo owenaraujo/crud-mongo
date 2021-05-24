@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 export const verifyToken = async (req, res, next) => {
   try {
   let {token} = req.params
-console.log(token);
     if (token == 1234) return  res.json({message: 'no se ha iniciado sesion',
     value: null})
     jwt.verify(token, 'secreto');

@@ -10,6 +10,8 @@ router.post('/signin', authController.sigin);
     value: true})
   })
   router.get('/getUsers/' ,authController.getUsers)
+  router.delete('/user/:id&&:rol' ,authController.deleteUser)
+  router.put('/user/:id&&:rol' ,authController.activateUser)
 
 router.post("/signup", authController.signup);
 router.get("/:name", authController.GetUserByUsername);
