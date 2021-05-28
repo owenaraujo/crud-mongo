@@ -4,8 +4,8 @@ const router = Router();
 router.post("/", productosController.addproductos);
 router.get("/get", productosController.getproductos);
 router.get("/get/count", productosController.getproductosCount);
-router.delete("/", productosController.deleteproductos);
-router.put("/", productosController.putproductos);
+router.delete("/:id", productosController.deleteproductos);
+router.put("/:id", productosController.putproductos);
 router.get("/:id", productosController.getproductosById);
 router.get("/searchFromDelete/:paramether", productosController.getproductosByParams);
 

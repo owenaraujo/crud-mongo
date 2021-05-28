@@ -3,6 +3,30 @@ import Roles from "../models/roles";
 import jwt from "jsonwebtoken";
 import usuarios from "../models/usuarios";
 
+export const EditUser = async (req, res) => {
+  try {
+    const { password,nombre , documento, correo, username,_id } = req.body;
+    const data = await usuarios.find({username: username})
+if (data[0]._id != _id) {
+  res.json({ value: false, message: "usuario de acceso en uso" });
+return
+}
+    const datosUsuario = {
+      
+      password: await Usuarios.encrypPassword(password),
+      nombre,
+      documento,
+      correo,
+      username,
+    };
+
+    await Usuarios.findByIdAndUpdate(_id,datosUsuario)
+
+    res.json({ value: true, message: "usuario editado" });
+  } catch (error) {
+    res.json({ value: false, message: "no se pudo procesar" });
+  }
+};
 export const signup = async (req, res) => {
   try {
     const { password,nombre , documento,roles, correo, username } = req.body;
@@ -24,7 +48,6 @@ return
 
     res.json({ value: true, message: "nuevo usuario creado" });
   } catch (error) {
-    console.log(error);
     res.json({ value: false, message: "no se pudo procesar" });
   }
 };
@@ -70,14 +93,12 @@ export const sigin = async (req, res) => {
       res.json({ message: "usuario no encontrado", value: null });
     }
   } catch (error) {
-    console.log(error);
     res.json({ message: "no hay conexion", value: false });
   }
 };
 
 export const getRoles = async (req, res) => {
   const data = await Roles.find();
-  console.log(data);
   res.json(data);
 };
 export const activateUser = async (req, res) => {

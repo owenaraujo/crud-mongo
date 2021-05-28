@@ -6,8 +6,11 @@ const productoSchema = new Schema(
       required: true,
       trim: true,
     },
+
     codigo: {
       type: String,
+      unique: true,
+      
       required: true,
     },
     descripcion: {
@@ -25,16 +28,24 @@ const productoSchema = new Schema(
       trim: true,
     },
     proveedor_id: { ref: "Proveedor", type: Schema.Types.ObjectId },
-    unidadMedida: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    unidadMedida: { ref: "Unidades", type: Schema.Types.ObjectId },
     cantidad: {
       type: Number,
       required: true,
       trim: true,
-    }
+    },
+    status: {
+      type: Boolean,
+    default: true,
+  
+
+    },
+    alerta: {
+      type: String,
+    default: null,
+  
+
+    },
   },
   {
     versionKey: false,

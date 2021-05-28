@@ -1,72 +1,55 @@
+import Ventas from "../models/ventas";
 import Productos from "../models/productos";
 
-export const addproductos = async (req, res) => {
+export const addventas = async (req, res, next) => {
   try {
-    const {
-      nombre,
-      codigo,
-      stock,
-      descripcion,
-      categoria,
-      unidadMedida,
-      precio,
-      proveedor_id,
-      cantidad,
-    } = req.body;
-const producto = await Productos.countDocuments({codigo: codigo})
-if (producto > 0) {
-  return    res.json({ message: "codigo de producto en uso", value: false });
+    const valores = req.body
+    
+    valores.productos.forEach(async(element) => {
+        const id = element.id_producto
+        const data = await Productos.findById(id)
+        const resta = data.cantidad - element.cantidad
+       
+      await Productos.findByIdAndUpdate(id,{cantidad: resta})
+    });
+ const data = new Ventas(valores)
 
-}
 
-    const NewProduct = {
-      nombre,
-      codigo,
-      stock,
-      descripcion,
-      categoria,
-      unidadMedida,
-      precio,
-      proveedor_id,
-      cantidad,
-    };
-
-  const data = new Productos(NewProduct)
   await data.save()
-    res.json({ message: "producto guardado con exito", value: true });
+  res.json({value: true, message: ' venta hecha con exito'})
+
   } catch (error) {
     res.json({ message: "no se pudo procesar", value: false });
   }
 };
-export const getproductosCount = async (req, res) => {
+export const getventasCount = async (req, res) => {
   try {
-    const productos = await Productos.estimatedDocumentCount({status: true})
-    res.json(productos);
+    const ventas = await Ventas.estimatedDocumentCount()
+    res.json(ventas);
   } catch (error) {
     res.json({ message: "no se pudo procesar", value: false });
   }
 };
-export const getproductos = async (req, res) => {
+export const getventas = async (req, res) => {
   try {
-    const productos = await Productos.find({status: true})
-      .populate("proveedor_id")
-      .populate("categoria").populate('unidadMedida')
-    res.json(productos);
+    const ventas = await Ventas.find()
+      .populate("productos.id_producto")
+    res.json(ventas);
   } catch (error) {
     res.json({ message: "no se pudo procesar", value: false });
   }
 };
-export const deleteproductos = async (req, res) => {
+export const deleteventas = async (req, res) => {
  try {
   const { id } = req.params;
-  await Productos.findByIdAndUpdate(id, { status: false });
+  await Ventas.findByIdAndUpdate(id, { status: false });
   res.json({ message: "borrado con exito", value: null });
  } catch (error) {
   res.json({ message: "no se pudo procesar", value: false });
    
  }
 };
-export const putproductos = async (req, res) => {
+export const putventas = async (req, res) => {
   try {
     const { id } = req.params;
     const {
@@ -93,26 +76,26 @@ export const putproductos = async (req, res) => {
       proveedor_id,
       cantidad,
     };
-    await Productos.findByIdAndUpdate(id, NewProduct);
+    await Ventas.findByIdAndUpdate(id, NewProduct);
     res.json({ message: "editado con exito", value: null });
   } catch (error) {
     res.json({ message: "no se pudo procesar", value: false });
     
   }
 };
-export const getproductosById = async (req, res) => {
+export const getventasById = async (req, res) => {
   try {
     const { id } = req.params;
-    const data =await Productos.findById(id);
+    const data =await Ventas.findById(id);
     res.json(data);
   } catch (error) {
     res.json({message : 'no se pudo procesar', value: false})
   }
 };
-export const getproductosByParams = async (req, res) => {
+export const getventasByParams = async (req, res) => {
   try {
     const { paramether } = req.params;
-    const producto = await Productos.find({
+    const producto = await Ventas.find({
       nombre: { $regex: paramether },
       status: true,
     });

@@ -17,6 +17,7 @@ import pkg from "../../package.json";
 
 import productos from "../routes/productos";
 import proveedores from "../routes/proveedores";
+import ventas from "../routes/ventas";
 import "../controller/controller.auth";
 const app = express();
 
@@ -60,6 +61,7 @@ app.get("/informacion", (req, res) => {
 });
 
 
+app.use("/ventas", ventas);
 app.use("/mantenimiento", mantenimiento);
 app.use("/auth", auth);
 app.use("/chat", chat);
