@@ -1,11 +1,13 @@
 import { Router } from "express";
+import {verifyToken} from '../middlewares/auth.jwt'
+
 import * as productosController from "../controller/controller.productos";
 const router = Router();
-router.post("/", productosController.addproductos);
+router.post("/",verifyToken, productosController.addproductos);
 router.get("/get", productosController.getproductos);
 router.get("/get/count", productosController.getproductosCount);
-router.delete("/:id", productosController.deleteproductos);
-router.put("/:id", productosController.putproductos);
+router.delete("/:id",verifyToken, productosController.deleteproductos);
+router.put("/:id",verifyToken, productosController.putproductos);
 router.get("/:id", productosController.getproductosById);
 router.get("/searchFromDelete/:paramether", productosController.getproductosByParams);
 

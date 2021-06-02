@@ -4,14 +4,30 @@ import Productos from "../models/productos";
 export const addventas = async (req, res, next) => {
   try {
     const valores = req.body
-    
-    valores.productos.forEach(async(element) => {
+
+const val= await Promise.all(valores.productos.map(async function (item) {
+  
+  const id = item.id_producto
+  
+  const data = await Productos.findById(id)
+  
+ 
+  const resta = data.cantidad - item.cantidad
+
+   if(resta  < 0 ) return false
+}))
+if (val[0] === false ) return
+valores.productos.forEach(async(element) => {
         const id = element.id_producto
         const data = await Productos.findById(id)
-        const resta = data.cantidad - element.cantidad
+        
        
+        const resta = data.cantidad - element.cantidad
+      //if(data.stock < venta)
+         if(resta  < 0 ) return 
       await Productos.findByIdAndUpdate(id,{cantidad: resta})
-    });
+    }); 
+    
  const data = new Ventas(valores)
 
 
