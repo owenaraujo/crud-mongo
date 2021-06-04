@@ -48,8 +48,9 @@ export const getventasCount = async (req, res) => {
 };
 export const getventas = async (req, res) => {
   try {
+
     const ventas = await Ventas.find()
-      .populate("productos.id_producto")
+      .populate({path: "productos.id_producto", populate: {path: 'categoria'}})
     res.json(ventas);
   } catch (error) {
     res.json({ message: "no se pudo procesar", value: false });

@@ -6,7 +6,7 @@ router.post("/",verifyToken, ventasController.addventas);
 router.post("/",verifyToken,(req, res)=>{
     return res.json(req.headers)
 });
-router.get("/get", ventasController.getventas);
+router.get("/get/", ventasController.getventas);
 router.get("/get/count", ventasController.getventasCount);
 router.delete("/:id",verifyToken, ventasController.deleteventas);
 router.put("/:id", verifyToken, ventasController.putventas);
