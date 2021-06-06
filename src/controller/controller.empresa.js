@@ -44,6 +44,21 @@ export const putDolar = async (req, res) => {
     });
   }
 };
+export const putDatos = async (req, res) => {
+  try {
+    const {id}= req.params
+    const { nombre,rif,telefono } = req.body;
+    const data = {  nombre,rif,telefono};
+     await Empresa.findByIdAndUpdate(id,data);
+      
+    res.json({ message: "editado con exito", value: null });
+  } catch (error) {
+    res.json({
+      message: "no se pudo procesar",
+      value: false,
+    });
+  }
+};
 export const getEmpresa = async (req, res) => {
   const data = await Empresa.findOne();
   res.json(data);

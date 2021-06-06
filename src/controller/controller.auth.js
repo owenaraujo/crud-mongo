@@ -98,8 +98,12 @@ export const sigin = async (req, res) => {
 };
 
 export const getRoles = async (req, res) => {
-  const data = await Roles.find();
+  try {
+    const data = await Roles.find();
   res.json(data);
+  } catch (error) {
+    
+  }
 };
 export const activateUser = async (req, res) => {
  try {
@@ -140,22 +144,34 @@ res.json({value: false, message: 'usuario desactivado con exito'})
  }
 }
 export const getUser = async (req, res) => {
+ try {
   const { id } = req.params;
   const data = await Usuarios.findById(id).populate("roles");
   res.json(data);
+ } catch (error) {
+   
+ }
 };
 export const getUsers = async (req, res) => {
-  const data = await Usuarios.find().populate("roles");
+  try {
+    const data = await Usuarios.find().populate("roles");
   res.json(data);
+  } catch (error) {
+    
+  }
 };
 
 export const GetUserByUsername = async (req, res) => {
-  const { name } = req.params;
+  try {
+    const { name } = req.params;
   const data = await Usuarios.find({ username: name });
 
   if (data) {
     res.json(data);
   } else {
     res.json({ value: true, message: "nombre de usuario disponible" });
+  }
+  } catch (error) {
+    
   }
 };

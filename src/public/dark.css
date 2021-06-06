@@ -1,0 +1,32 @@
+.dark-secondary{
+    background: #151E21 !important;
+    
+}
+.dark-complement{
+    background: #01516b !important;
+    /* opacity: 8%; */
+}
+.dark-primary{
+    background: #000000 !important
+    
+}
+.color-primary{
+    background: #03a5a5 !important;
+    
+}
+.color-secondary{
+    background: #027979 !important;
+    
+}
+.color-alert{
+    background: #570080 !important;
+   
+}
+.color-danger{
+    background: #d44006 !important;
+   
+}
+.prueba{
+    width: 100%;
+    height: 50px;
+}

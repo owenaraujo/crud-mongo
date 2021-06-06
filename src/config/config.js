@@ -1,9 +1,8 @@
 import express from "express";
 import sessions from "express-session";
-
+import path from 'path'
 import { createRol, Createuser, CreateEmpresa } from "../libs/setup";
 import passport from "passport";
-
 import cors from "cors";
 
 import morgan from "morgan";
@@ -59,8 +58,7 @@ app.get("/informacion", (req, res) => {
     autor: app.get("info").author,
   });
 });
-
-
+app.use(express.static(path.join(__dirname, "../public")));
 app.use("/ventas", ventas);
 app.use("/mantenimiento", mantenimiento);
 app.use("/auth", auth);
@@ -69,6 +67,7 @@ app.use("/system", system);
 app.use("/productos", productos);
 app.use("/proveedores", proveedores);
 app.use(function(req, res, next) {
-  res.status(404).send('ruta no encontrada');
+  res.redirect('/')
 });
+
 export default app;

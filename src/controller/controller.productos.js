@@ -56,6 +56,26 @@ export const getproductos = async (req, res) => {
     res.json({ message: "no se pudo procesar", value: false });
   }
 };
+export const getproductosDisable = async (req, res) => {
+  try {
+    const productos = await Productos.find({status: false})
+      .populate("proveedor_id")
+      .populate("categoria").populate('unidadMedida')
+    res.json(productos);
+  } catch (error) {
+    res.json({ message: "no se pudo procesar", value: false });
+  }
+};
+export const putproductosActivate = async (req, res) => {
+ try {
+  const { id } = req.params;
+  await Productos.findByIdAndUpdate(id, { status: true });
+  res.json({ message: "activado con exito", value: null });
+ } catch (error) {
+  res.json({ message: "no se pudo procesar", value: false });
+   
+ }
+};
 export const deleteproductos = async (req, res) => {
  try {
   const { id } = req.params;

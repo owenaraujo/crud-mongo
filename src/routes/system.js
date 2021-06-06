@@ -20,6 +20,7 @@ router.get("/empresa", empresa.getEmpresa);
 router.put("/empresa/:id",verifyToken, empresa.putEmpresa);
 //router.delete("/empresa/:id",empresa.deleteEmpresa);
 router.put("/empresa/dolar/:id",verifyToken,empresa.putDolar);
+router.put("/empresa/datos/:id",verifyToken,empresa.putDatos);
 
 
 
