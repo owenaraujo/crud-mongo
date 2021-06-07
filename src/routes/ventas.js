@@ -3,9 +3,7 @@ import { verifyToken } from "../middlewares/auth.jwt";
 import * as ventasController from "../controller/controller.ventas";
 const router = Router();
 router.post("/",verifyToken, ventasController.addventas);
-router.post("/",verifyToken,(req, res)=>{
-    return res.json(req.headers)
-});
+
 router.get("/get/", ventasController.getventas);
 router.get("/get/count", ventasController.getventasCount);
 router.delete("/:id",verifyToken, ventasController.deleteventas);

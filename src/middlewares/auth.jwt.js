@@ -1,6 +1,7 @@
 
 import jwt from "jsonwebtoken";
-//import Usuarios from "../models/usuarios";
+import config from "../config/db";
+
 export const verifyToken = async (req, res, next) => {
   try {
     
@@ -8,7 +9,7 @@ export const verifyToken = async (req, res, next) => {
   
     if (xtoken == 1234) return  res.json({message: 'no se ha iniciado sesion',
     value: null})
-    jwt.verify(xtoken, 'secreto');
+    jwt.verify(xtoken, config.secret);
     next();
   } catch (error) {
     res.json({message: 'debe iniciar sesion de nuevo',

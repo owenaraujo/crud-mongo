@@ -4,7 +4,7 @@ import config from "./config/db";
   try {
     const db = await mongoose.connect(
      
-       'mongodb://localhost:27017/inventario', {
+      `mongodb:${config.mongodb}`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,

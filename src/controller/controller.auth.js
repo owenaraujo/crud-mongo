@@ -2,6 +2,7 @@ import Usuarios from "../models/usuarios";
 import Roles from "../models/roles";
 import jwt from "jsonwebtoken";
 import usuarios from "../models/usuarios";
+import config from "../config/db";
 
 export const EditUser = async (req, res) => {
   try {
@@ -72,7 +73,7 @@ export const sigin = async (req, res) => {
       }
     const users = usuarios[0];
 
-    const token = jwt.sign({ id: users._id }, "secreto", { expiresIn: 36000 });
+    const token = jwt.sign({ id: users._id }, config.secret, { expiresIn: 36000 });
 
     if (users) {
       const validPassword = await Usuarios.comparePassword(
