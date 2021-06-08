@@ -15,3 +15,5 @@ import config from "./config/db";
     console.log('base de datos no iniciada')
   }
 })();
+
+
