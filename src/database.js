@@ -4,7 +4,7 @@ import config from "./config/db";
   try {
     const db = await mongoose.connect(
      
-      `mongodb:${config.mongodb}`, {
+      `mongodb+srv://owenaraujo20:<password>@inventario.6bs3b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
