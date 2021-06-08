@@ -67,7 +67,7 @@ app.use("/system", system);
 app.use("/productos", productos);
 app.use("/proveedores", proveedores);
 app.use(function(req, res, next) {
-  res.redirect('/')
+  res.send('no funciona')
 });
 
 export default app;
