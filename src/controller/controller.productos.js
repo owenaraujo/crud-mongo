@@ -48,6 +48,16 @@ export const getproductosCount = async (req, res) => {
 };
 export const getproductos = async (req, res) => {
   try {
+    const productos = await Productos.find()
+      .populate("proveedor_id")
+      .populate("categoria").populate('unidadMedida')
+    res.json(productos);
+  } catch (error) {
+    res.json({ message: "no se pudo procesar", value: false });
+  }
+};
+export const getproductosActivate = async (req, res) => {
+  try {
     const productos = await Productos.find({status: true})
       .populate("proveedor_id")
       .populate("categoria").populate('unidadMedida')
@@ -69,8 +79,14 @@ export const getproductosDisable = async (req, res) => {
 export const putproductosActivate = async (req, res) => {
  try {
   const { id } = req.params;
+  const data = await Productos.findById(id);
+  if (data.cantidad === 0) {
+  res.json({ message: "no se puede activar un producto con stock 0", value: null });
+  return 
+    
+  }
   await Productos.findByIdAndUpdate(id, { status: true });
-  res.json({ message: "activado con exito", value: null });
+  res.json({ message: "activado con exito", value: true });
  } catch (error) {
   res.json({ message: "no se pudo procesar", value: false });
    
@@ -80,7 +96,7 @@ export const deleteproductos = async (req, res) => {
  try {
   const { id } = req.params;
   await Productos.findByIdAndUpdate(id, { status: false });
-  res.json({ message: "borrado con exito", value: null });
+  res.json({ message: "desactivado con exito", value: null });
  } catch (error) {
   res.json({ message: "no se pudo procesar", value: false });
    

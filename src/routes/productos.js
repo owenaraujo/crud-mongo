@@ -5,6 +5,7 @@ import * as productosController from "../controller/controller.productos";
 const router = Router();
 router.post("/",verifyToken, productosController.addproductos);
 router.get("/get", productosController.getproductos);
+router.get("/get/activate", productosController.getproductosActivate);
 router.get("/getDisable", productosController.getproductosDisable);
 router.get("/get/count", productosController.getproductosCount);
 router.delete("/:id",verifyToken, productosController.deleteproductos);

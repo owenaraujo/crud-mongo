@@ -43,7 +43,7 @@ export const getproveedoByParam = async (req, res) => {
 };
 export const getproveedor = async (req, res) => {
   try {
-    const proveedores = await Proveedor.find({status: true}).sort({nombre:1})
+    const proveedores = await Proveedor.find().sort({nombre:1})
   res.json(proveedores);
   } catch (error) {
    res.json({message: 'no hay conexion',
@@ -63,8 +63,20 @@ export const deleteproveedor = async (req, res) => {
  try {
    const { id } = req.params;
    await Proveedor.findByIdAndUpdate(id,{status: false});
-   res.json({message : 'borrado con exito',
- value : false});
+   res.json({message : 'desactivado con exito',
+ value : null});
+ } catch (e) {
+   res.json({message : 'no se pudo procesar',
+ value : false
+});
+ }
+};
+export const ActivateProveedor = async (req, res) => {
+ try {
+   const { id } = req.params;
+   await Proveedor.findByIdAndUpdate(id,{status: true});
+   res.json({message : 'activado con exito',
+ value : true});
  } catch (e) {
    res.json({message : 'no se pudo procesar',
  value : false
