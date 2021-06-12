@@ -4,7 +4,7 @@ import * as ventasController from "../controller/controller.ventas";
 const router = Router();
 router.post("/",verifyToken, ventasController.addventas);
 
-router.get("/get/", ventasController.getventas);
+router.get("/get/:inicio/:final", ventasController.getventas);
 router.get("/get/count", ventasController.getventasCount);
 router.delete("/:id",verifyToken, ventasController.deleteventas);
 router.put("/:id", verifyToken, ventasController.putventas);

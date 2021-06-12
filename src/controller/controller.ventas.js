@@ -48,8 +48,17 @@ export const getventasCount = async (req, res) => {
 };
 export const getventas = async (req, res) => {
   try {
-
-    const ventas = await Ventas.find()
+    const {inicio, final}= req.params
+   
+    var fecha = 'T23:59:00.000Z'
+    var fechaInicio = new Date(inicio);
+    var fechaFinal = new Date(final+fecha);
+    const ventas = await Ventas.find(
+     { createdAt:{
+        $gte: fechaInicio,
+        $lt: fechaFinal
+    }}
+    )
       .populate({path: "productos.id_producto", populate: {path: 'categoria'}})
     res.json(ventas);
   } catch (error) {

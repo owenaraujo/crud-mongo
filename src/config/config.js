@@ -1,8 +1,8 @@
 import express from "express";
-import sessions from "express-session";
+
 import path from 'path'
 import { createRol, Createuser, CreateEmpresa } from "../libs/setup";
-import passport from "passport";
+
 import cors from "cors";
 
 import morgan from "morgan";
@@ -15,6 +15,7 @@ import system from "../routes/system";
 import pkg from "../../package.json";
 
 import productos from "../routes/productos";
+// import electron from 'electron'
 import proveedores from "../routes/proveedores";
 import ventas from "../routes/ventas";
 import "../controller/controller.auth";
@@ -31,21 +32,7 @@ app.set("info", pkg);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(
-  sessions({
-    secret: "secret",
-    resave: true,
-    saveUninitialized: true,
-    // store: new session ({ mongooseConnection: mongoose.connection }),
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
-app.use((req, res, next) => {
-  app.locals.usuario = req.user || null;
 
-  next();
-});
 
 
 app.set("port", process.env.PORT || 3000);
@@ -70,4 +57,26 @@ app.use(function(req, res, next) {
   res.send('no funciona')
 });
 
+
+// function createWindow () {
+//   const win = new electron.BrowserWindow({
+//     width: 800,
+//     height: 600
+//   })
+
+//   win.loadFile('index.html')
+// }
+// electron.app.whenReady().then(() => {
+//   createWindow()
+// })
+// electron.app.on('window-all-closed', function () {
+//   if (process.platform !== 'darwin') electron.app.quit()
+// })
+// electron.app.whenReady().then(() => {
+//   createWindow()
+
+//   electron.app.on('activate', function () {
+//     if (electron.BrowserWindow.getAllWindows().length === 0) createWindow()
+//   })
+// })
 export default app;
