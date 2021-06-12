@@ -4,7 +4,7 @@ import config from "./config/db";
   try {
     const db = await mongoose.connect(
      
-      config.mongodb, {
+      config.mongodb_2, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,

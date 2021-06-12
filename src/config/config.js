@@ -6,7 +6,7 @@ import { createRol, Createuser, CreateEmpresa } from "../libs/setup";
 import cors from "cors";
 
 import morgan from "morgan";
-
+import ip from 'my-local-ip'
 import chat from "../routes/chat";
 import auth from "../routes/auth";
 
@@ -29,6 +29,7 @@ CreateEmpresa()
 app.use(cors());
 
 app.set("info", pkg);
+app.set('ip', ip())
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -43,10 +44,17 @@ app.use(morgan("dev"));
 app.get("/informacion", (req, res) => {
   res.json({
     autor: app.get("info").author,
+    contact: app.get("info").contact,
+    version: app.get("info").version,
+    name: app.get("info").name,
+    description: app.get("info").description,
+    ip: app.get('ip'),
+    PORT: app.get('port'),
   });
 });
 app.use(express.static(path.join(__dirname, "../public")));
 app.use("/ventas", ventas);
+
 app.use("/mantenimiento", mantenimiento);
 app.use("/auth", auth);
 app.use("/chat", chat);

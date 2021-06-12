@@ -1,5 +1,5 @@
 {
-  "name": "api-mongo",
+  "name": "Sistema de Registro de Inventario",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
@@ -32,6 +32,11 @@
     "build": "babel src --out-dir build",
     "start": "node build/index.js"
   },
-  "author": "serious programing",
+  "author": "Owen Araujo",
+  "contact":{"telefono":"+584147361209","correo": "owendjesus64@gmail.com",
+     "facebook": "https://www.facebook.com/owenDjesusAraujo/",
+     "twitter": "https://www.facebook.com/",
+     "Ig": "https://www.facebook.com/"
+     },
   "license": "ISC"
 }
