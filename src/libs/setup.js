@@ -10,7 +10,6 @@ export const createRol = async () => {
     new Roles({ name: "administrador" }).save(),
     new Roles({ name: "vendedor" }).save(),
   ]);
-  console.log(values);
   } catch (error) {
     console.log('sin procesar');
   }
@@ -62,7 +61,6 @@ export const Createuser = async () => {
     }).save(),
     
   ])
-  console.log(values);
 
   } catch (error) {
     console.log('sin procesar');
@@ -86,7 +84,6 @@ export const CreateEmpresa = async () => {
     
     
   ])
-  console.log(values);
 
   } catch (error) {
     console.log('sin procesar');

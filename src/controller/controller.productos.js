@@ -40,8 +40,8 @@ if (producto > 0) {
 };
 export const getproductosCount = async (req, res) => {
   try {
-    const productos = await Productos.estimatedDocumentCount({status: true})
-    res.json(productos);
+    const productos = await Productos.find({status: true})
+    res.json(productos.length);
   } catch (error) {
     res.json({ message: "no se pudo procesar", value: false });
   }

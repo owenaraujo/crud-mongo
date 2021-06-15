@@ -15,7 +15,6 @@ import system from "../routes/system";
 import pkg from "../../package.json";
 
 import productos from "../routes/productos";
-// import electron from 'electron'
 import proveedores from "../routes/proveedores";
 import ventas from "../routes/ventas";
 import "../controller/controller.auth";
@@ -46,7 +45,7 @@ app.get("/informacion", (req, res) => {
     autor: app.get("info").author,
     contact: app.get("info").contact,
     version: app.get("info").version,
-    name: app.get("info").name,
+    name: app.get("info").productName,
     description: app.get("info").description,
     ip: app.get('ip'),
     PORT: app.get('port'),
@@ -62,29 +61,8 @@ app.use("/system", system);
 app.use("/productos", productos);
 app.use("/proveedores", proveedores);
 app.use(function(req, res, next) {
-  res.send('no funciona')
+  res.redirect("/")
 });
 
 
-// function createWindow () {
-//   const win = new electron.BrowserWindow({
-//     width: 800,
-//     height: 600
-//   })
-
-//   win.loadFile('index.html')
-// }
-// electron.app.whenReady().then(() => {
-//   createWindow()
-// })
-// electron.app.on('window-all-closed', function () {
-//   if (process.platform !== 'darwin') electron.app.quit()
-// })
-// electron.app.whenReady().then(() => {
-//   createWindow()
-
-//   electron.app.on('activate', function () {
-//     if (electron.BrowserWindow.getAllWindows().length === 0) createWindow()
-//   })
-// })
 export default app;

@@ -29,7 +29,11 @@ export const putUnidades = async (req, res) => {
   }
 };
 export const getUnidades = async (req, res) => {
-  const data = await Unidades.find({ status: true });
+  const data = await Unidades.find();
+  res.json(data);
+};
+export const getUnidadesActive = async (req, res) => {
+  const data = await Unidades.find({status:true});
   res.json(data);
 };
 export const getUnidadesById = async (req, res) => {
@@ -42,8 +46,21 @@ export const deleteUnidades = async (req, res) => {
     const { id } = req.params;
     const datos = { status: false };
     await Unidades.findByIdAndUpdate(id, datos);
-    res.json({message : 'borrado con exito',
- value : false});
+    res.json({message : 'desactivado con exito',
+ value : null});
+  } catch (error) {
+    res.json({message : 'no se pudo procesar',
+    value : false
+   });
+  }
+};
+export const activateUnidades = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const datos = { status: true };
+    await Unidades.findByIdAndUpdate(id, datos);
+    res.json({message : 'activado con exito',
+ value : true});
   } catch (error) {
     res.json({message : 'no se pudo procesar',
     value : false

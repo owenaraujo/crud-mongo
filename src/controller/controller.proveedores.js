@@ -50,10 +50,19 @@ export const getproveedor = async (req, res) => {
   value: false})
   }
 };
+export const getproveedorActivate = async (req, res) => {
+  try {
+    const proveedores = await Proveedor.find({status: true}).sort({nombre:1})
+  res.json(proveedores);
+  } catch (error) {
+   res.json({message: 'no hay conexion',
+  value: false})
+  }
+};
 export const getproveedorCount = async (req, res) => {
   try {
-    const proveedores = await Proveedor.estimatedDocumentCount()
-  res.json(proveedores);
+    const data = await Proveedor.find({status: true})
+  res.json(data.length);
   } catch (error) {
    res.json({message: 'no hay conexion',
   value: false})

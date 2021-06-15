@@ -6,13 +6,17 @@ import * as empresa from "../controller/controller.empresa";
 import { verifyToken } from "../middlewares/auth.jwt";
 router.post("/categoriaProducto",verifyToken, categoriaProduct.addCategoriaProduct);
 router.get("/categoriaProducto", categoriaProduct.getCategoriaProduct);
+router.get("/categoriaProducto/activate", categoriaProduct.getCategoriaProductActivate);
 router.get("/categoriaProducto/:id", categoriaProduct.getCategoriaProductById);
 router.delete("/categoriaProducto/:id",verifyToken,categoriaProduct.deleteCategoriaProduct);
+router.delete("/categoriaProducto/activate/:id",verifyToken,categoriaProduct.activateCategoriaProduct);
 
 router.post("/unidades",verifyToken, unidades.addUnidades);
 router.get("/unidades", unidades.getUnidades);
+router.get("/unidades/activate", unidades.getUnidadesActive);
 router.get("/unidades/:id", unidades.getUnidadesById);
 router.delete("/unidades/:id",verifyToken,unidades.deleteUnidades);
+router.delete("/unidades/activate/:id",verifyToken,unidades.activateUnidades);
 
 //router.post("/empresa", empresa.addEmpresa);
 router.get("/empresa", empresa.getEmpresa);

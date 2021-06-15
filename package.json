@@ -1,5 +1,6 @@
 {
-  "name": "Sistema de Registro de Inventario",
+  "name": "sarm",
+  "productName": "Sistema de Registro de Inventario",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
@@ -9,12 +10,10 @@
     "connect-history-api-fallback": "^1.6.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "express-session": "^1.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.8",
     "my-local-ip": "^1.0.0",
-    "passport": "^0.4.1",
-    "passport-local": "^1.0.0",
+    "pm2": "^5.1.0",
     "socket.io": "^3.0.4"
   },
   "devDependencies": {
@@ -30,13 +29,15 @@
     "dev": "nodemon src/index.js --exec babel-node",
     "test": "babel-node src/index.js  ",
     "build": "babel src --out-dir build",
-    "start": "node build/index.js"
+    "start": "pm2 start build/index.js"
   },
   "author": "Owen Araujo",
-  "contact":{"telefono":"+584147361209","correo": "owendjesus64@gmail.com",
-     "facebook": "https://www.facebook.com/owenDjesusAraujo/",
-     "twitter": "https://www.facebook.com/",
-     "Ig": "https://www.facebook.com/"
-     },
+  "contact": {
+    "telefono": "+584147361209",
+    "correo": "owendjesus64@gmail.com",
+    "facebook": "https://www.facebook.com/owenDjesusAraujo/",
+    "twitter": "https://www.facebook.com/",
+    "Ig": "https://www.instagram.com/owen201512/?hl=es-la"
+  },
   "license": "ISC"
 }
