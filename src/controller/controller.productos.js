@@ -5,12 +5,16 @@ export const addproductos = async (req, res) => {
     const {
       nombre,
       codigo,
-      stock,
       descripcion,
       categoria,
-      unidadMedida,
-      precio,
+      aumento,
+      stock,
+      salida,
+      entrada,
+      salida_mayor,
+      cantidad_mayor,
       proveedor_id,
+      unidadMedida,
       cantidad,
     } = req.body;
 const producto = await Productos.countDocuments({codigo: codigo})
@@ -22,12 +26,16 @@ if (producto > 0) {
     const NewProduct = {
       nombre,
       codigo,
-      stock,
       descripcion,
       categoria,
-      unidadMedida,
-      precio,
+      aumento,
+      stock,
+      salida,
+      entrada,
+      salida_mayor,
+      cantidad_mayor,
       proveedor_id,
+      unidadMedida,
       cantidad,
     };
 
@@ -108,12 +116,16 @@ export const putproductos = async (req, res) => {
     const {
       nombre,
       codigo,
-      stock,
       descripcion,
       categoria,
-      unidadMedida,
-      precio,
+      aumento,
+      stock,
+      salida,
+      entrada,
+      salida_mayor,
+      cantidad_mayor,
       proveedor_id,
+      unidadMedida,
       cantidad,
 
     } = req.body;
@@ -121,12 +133,16 @@ export const putproductos = async (req, res) => {
     const NewProduct = {
       nombre,
       codigo,
-      stock,
       descripcion,
       categoria,
-      unidadMedida,
-      precio,
+      aumento,
+      stock,
+      salida,
+      entrada,
+      salida_mayor,
+      cantidad_mayor,
       proveedor_id,
+      unidadMedida,
       cantidad,
     };
     await Productos.findByIdAndUpdate(id, NewProduct);

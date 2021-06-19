@@ -20,9 +20,27 @@ const productoSchema = new Schema(
     },
     categoria: { ref: "categoriaProductos", type: Schema.Types.ObjectId }
     ,
-    stock: { type: Number},
+    aumento: { type: Boolean},
+    stock: { type: Number,},
 
-    precio: {
+    salida: {
+      type: Number,
+      required: true,
+      trim: true,
+    },
+
+    entrada: {
+      type: Number,
+      required: true,
+      trim: true,
+    },
+
+    salida_mayor: {
+      type: Number,
+      required: true,
+      trim: true,
+    },
+    cantidad_mayor: {
       type: Number,
       required: true,
       trim: true,

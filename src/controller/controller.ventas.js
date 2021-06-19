@@ -16,7 +16,20 @@ const val= await Promise.all(valores.productos.map(async function (item) {
 
    if(resta  < 0 ) return false
 }))
-if (val[0] === false ) return
+const val_mayor= await Promise.all(valores.por_mayor.map(async function (item) {
+  
+  const id = item.id_producto
+  
+  const data = await Productos.findById(id)
+  
+ 
+  const resta = data.cantidad - item.cantidad
+
+   if(resta  < 0 ) return false
+}))
+if (val.indexOf(false) !== -1 )  return console.log(val)
+if (val_mayor.indexOf(false) !== -1 ) return console.log(val); 
+
 valores.productos.forEach(async(element) => {
         const id = element.id_producto
         const data = await Productos.findById(id)
