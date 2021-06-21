@@ -5,41 +5,51 @@ export const addventas = async (req, res, next) => {
   try {
     const valores = req.body
 
-const val= await Promise.all(valores.productos.map(async function (item) {
+  const val= await Promise.all(valores.productos.map(async function (item) {
   
-  const id = item.id_producto
+    const id = item.id_producto
+    const data = await Productos.findById(id)
+    
+   
+    const resta = data.cantidad - item.cantidad
   
-  const data = await Productos.findById(id)
-  
- 
-  const resta = data.cantidad - item.cantidad
+     if(resta  < 0 ) return false
+  }))
 
-   if(resta  < 0 ) return false
-}))
 const val_mayor= await Promise.all(valores.por_mayor.map(async function (item) {
   
   const id = item.id_producto
+  const data = await Productos.findById(id)
+ 
+  const resta =  data.cantidad -  item.cantidad * data.cantidad_mayor 
+console.log(resta);
+   if(resta  < 0 ) return false
+}))
+
+if (val.indexOf(false) !== -1 )  return    res.json({ message: "inventario no disponible", value: false });
+if (val_mayor.indexOf(false) !== -1 ) return    res.json({ message: "inventario no disponible", value: false });
+ 
+
+await Promise.all(valores.por_mayor.map(async function (item) {
   
+  const id = item.id_producto
+  const data = await Productos.findById(id)
+ 
+  const resta =  data.cantidad -  item.cantidad * data.cantidad_mayor 
+  await Productos.findByIdAndUpdate(id,{cantidad: resta})
+
+}))
+await Promise.all(valores.productos.map(async function (item) {
+  
+  const id = item.id_producto
   const data = await Productos.findById(id)
   
  
   const resta = data.cantidad - item.cantidad
+  await Productos.findByIdAndUpdate(id,{cantidad: resta})
 
-   if(resta  < 0 ) return false
 }))
-if (val.indexOf(false) !== -1 )  return console.log(val)
-if (val_mayor.indexOf(false) !== -1 ) return console.log(val); 
 
-valores.productos.forEach(async(element) => {
-        const id = element.id_producto
-        const data = await Productos.findById(id)
-        
-       
-        const resta = data.cantidad - element.cantidad
-      //if(data.stock < venta)
-         if(resta  < 0 ) return 
-      await Productos.findByIdAndUpdate(id,{cantidad: resta})
-    }); 
     
  const data = new Ventas(valores)
 
@@ -53,7 +63,7 @@ valores.productos.forEach(async(element) => {
 };
 export const getventasCount = async (req, res) => {
   try {
-    const ventas = await Ventas.estimatedDocumentCount()
+    const ventas = await Ventas.find()
     res.json(ventas);
   } catch (error) {
     res.json({ message: "no se pudo procesar", value: false });
@@ -72,7 +82,11 @@ export const getventas = async (req, res) => {
         $lt: fechaFinal
     }}
     )
-      .populate({path: "productos.id_producto", populate: {path: 'categoria'}})
+      .populate({path: "productos.id_producto", populate: {path: 'categoria'}},
+      
+      ).populate({path: "por_mayor.id_producto", populate: {path: 'categoria'}},
+      
+      )
     res.json(ventas);
   } catch (error) {
     res.json({ message: "no se pudo procesar", value: false });
