@@ -8,18 +8,19 @@ const ventaSchema = new Schema(
     is_dolar: Boolean,
     productos: [
         {
-            
+            entrada: Number,
+            salida: Number,
             cantidad: Number,
-            precio:Number,
+           
             id_producto: { ref: "producto", type: Schema.Types.ObjectId }
             
           }
     ],
     por_mayor: [
         {
-            
+          entrada: Number,
+          salida: Number,
             cantidad: Number,
-            precio:Number,
             id_producto: { ref: "producto", type: Schema.Types.ObjectId }
             
           }
