@@ -63,7 +63,7 @@ await Promise.all(valores.productos.map(async function (item) {
 };
 export const getventasCount = async (req, res) => {
   try {
-    const ventas = await Ventas.find()
+    const ventas = await Ventas.countDocuments()
     res.json(ventas);
   } catch (error) {
     res.json({ message: "no se pudo procesar", value: false });
