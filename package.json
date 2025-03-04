@@ -6,6 +6,7 @@
   "main": "src/index.js",
   "dependencies": {
     "@babel/plugin-transform-runtime": "^7.12.10",
+    "babel": "^5.8.38",
     "bcryptjs": "^2.4.3",
     "connect-history-api-fallback": "^1.6.0",
     "cors": "^2.8.5",

@@ -11,7 +11,7 @@ export const createRol = async () => {
     new Roles({ name: "vendedor" }).save(),
   ]);
   } catch (error) {
-    console.log('sin procesar');
+    console.log('error');
   }
   
 };

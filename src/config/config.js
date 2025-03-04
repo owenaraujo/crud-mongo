@@ -16,6 +16,8 @@ import pkg from "../../package.json";
 
 import productos from "../routes/productos";
 import proveedores from "../routes/proveedores";
+import vidrios from "../routes/categoria_vidrio";
+import modelos from "../routes/modelos";
 import ventas from "../routes/ventas";
 import "../controller/controller.auth";
 const app = express();
@@ -60,6 +62,9 @@ app.use("/chat", chat);
 app.use("/system", system);
 app.use("/productos", productos);
 app.use("/proveedores", proveedores);
+app.use("/vidrios", vidrios);
+app.use("/modelos", modelos);
+
 app.use(function(req, res, next) {
   res.redirect("/")
 });
